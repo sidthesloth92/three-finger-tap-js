@@ -1,0 +1,42 @@
+{
+  "name": "three-finger-tap-js",
+  "description": "A small library that attempts to mimic the three finger tap behaviour exhibited when you do a three finder tap on an URL in Safari.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prebuild": "jshint ./src/*.js",
+    "build": "",
+    "serve": "",
+    "commit": "git-cz",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sidthesloth92/three-finger-tap-js.git"
+  },
+  "keywords": [
+    "safari",
+    "three",
+    "finger",
+    "tap",
+    "url",
+    "preview"
+  ],
+  "author": "Dinesh Balaji <www.sidthesloth@gmail.com> (https://dbwriteups.wordpress.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sidthesloth92/three-finger-tap-js/issues"
+  },
+  "homepage": "https://github.com/sidthesloth92/three-finger-tap-js#readme",
+  "devDependencies": {
+    "commitizen": "2.8.2",
+    "cz-conventional-changelog": "1.1.6",
+    "semantic-release": "^4.3.5"
+  },
+  "jshintConfig": {
+    "esversion": 6
+  },
+  "czConfig": {
+    "path": "node_modules/cz-conventional-changelog"
+  }
+}
