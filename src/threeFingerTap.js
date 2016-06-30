@@ -6,8 +6,8 @@
 
     threeFingerTap.init = init;
 
-    function init() {
-        var nodes = document.querySelectorAll('.three-finger-tap');
+    function init(name) {
+        var nodes = document.querySelectorAll(name);
         threeFingerTap.nodes = Array.from(nodes);
     }
 
