@@ -4,9 +4,23 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
-    "prebuild": "jshint ./src/*.js",
-    "build": "",
-    "serve": "",
+    "lint": "jshint src/js/*",
+    "prejs": "rm -rf dist/js && mkdir dist/js/",
+    "js": "babel --presets babel-preset-es2015 --out-file dist/js/threeFingerTap.js src/js",
+    "minify:js": "uglifyjs dist/js/threeFingerTap.js -o dist/js/threeFingerTap.min.js",
+    "scss": "node-sass src/scss/threeFingerTap.scss dist/css/threeFingerTap.css",
+    "postcss": "postcss --use autoprefixer -o dist/css/threeFingerTap.css dist/css/threeFingerTap.css",
+    "minify:css": "cleancss dist/css/threeFingerTap.css -o dist/css/threeFingerTap.min.css",
+    "combine": "node-sass src/scss/main.scss | postcss --use autoprefixer | cleancss -o dist/threeFingerTap.min.css",
+    "build:js:dev": "npm run lint && npm run js",
+    "build:js:prod": "npm run lint && npm run js && npm run minify:js",
+    "build:css:dev": "npm run scss && npm run postcss",
+    "build:css:prod": "npm run scss && npm run postcss && npm run minify:css",
+    "build:dev": "npm run build:js:dev && npm run build:css:dev",
+    "build:prod": "npm run build:js:prod && npm run build:css:prod",
+    "watch:js": "onchange 'src/**/*.js' -- npm run build:js:dev",
+    "watch:css": "onchange 'src/**/*.scss' -- npm run build:css:dev",
+    "watch": "parallelshell 'npm run watch:js' 'npm run watch:css'",
     "commit": "git-cz",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
@@ -29,9 +43,19 @@
   },
   "homepage": "https://github.com/sidthesloth92/three-finger-tap-js#readme",
   "devDependencies": {
+    "autoprefixer": "6.3.7",
+    "babel-cli": "6.10.1",
+    "babel-preset-es2015": "6.9.0",
+    "clean-css": "3.4.18",
     "commitizen": "2.8.2",
     "cz-conventional-changelog": "1.1.6",
-    "semantic-release": "^4.3.5"
+    "jshint": "2.9.2",
+    "node-sass": "3.8.0",
+    "onchange": "2.5.0",
+    "parallelshell": "2.0.0",
+    "postcss-cli": "2.5.2",
+    "semantic-release": "^4.3.5",
+    "uglify-js": "2.6.4"
   },
   "jshintConfig": {
     "esversion": 6

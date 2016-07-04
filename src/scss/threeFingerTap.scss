@@ -1,0 +1,7 @@
+.outer {
+    display: inline;
+    .inner {
+        color: blue;
+        transform : rotate(360deg);
+    }
+}

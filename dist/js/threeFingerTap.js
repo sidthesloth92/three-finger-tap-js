@@ -1,8 +1,10 @@
-((window) => {
-    var threeFingerTap  = {};
+"use strict";
+
+(function (window) {
+    //This is a comment;
+    var threeFingerTap = {};
 
     threeFingerTap.nodes = [];
-
 
     threeFingerTap.init = init;
 
