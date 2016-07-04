@@ -21,6 +21,7 @@
     "watch:js": "onchange 'src/**/*.js' -- npm run build:js:dev",
     "watch:css": "onchange 'src/**/*.scss' -- npm run build:css:dev",
     "watch": "parallelshell 'npm run watch:js' 'npm run watch:css'",
+    "start" : "parallelshell 'npm run watch' 'live-server --open=dist'",
     "commit": "git-cz",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
@@ -50,6 +51,7 @@
     "commitizen": "2.8.2",
     "cz-conventional-changelog": "1.1.6",
     "jshint": "2.9.2",
+    "live-server": "1.0.0",
     "node-sass": "3.8.0",
     "onchange": "2.5.0",
     "parallelshell": "2.0.0",
