@@ -9,6 +9,7 @@
     threeFingerTap.init = init;
     threeFingerTap.constructDOM = constructDOM;
     threeFingerTap.showPreviewWindow = showPreviewWindow;
+    threeFingerTap.hidePreviewWindow = hidePreviewWindow;
     threeFingerTap.findQuadrant = findQuadrant;
     threeFingerTap.findPreviewWindowPosition = findPreviewWindowPosition;
     threeFingerTap.updatePreviewWindow = updatePreviewWindow;
@@ -36,9 +37,7 @@
         });
 
         let iframe_overlay = document.querySelector('.tft_iframe_overlay');
-        iframe_overlay.addEventListener('click', (event) => {
-            
-        });
+        iframe_overlay.addEventListener('click', threeFingerTap.hidePreviewWindow);
     }
     function init(name) {
         threeFingerTap.name = name;
@@ -65,19 +64,25 @@
     }
 
     function showPreviewWindow() {
-        console.log("showPreviewWindow");
         let positionBox = threeFingerTap.currentNode.getBoundingClientRect();
         let { xQuadrant, yQuadrant } = threeFingerTap.findQuadrant(positionBox);
         
-        let positions = threeFingerTap.findPreviewWindowPosition({ xQuadrant, yQuadrant, positionBox });
-        threeFingerTap.updatePreviewWindow(positions);
+        let previewWindowData = threeFingerTap.findPreviewWindowPosition({ xQuadrant, yQuadrant, positionBox });
+        previewWindowData.src = threeFingerTap.currentNode.getAttribute('href');
+        threeFingerTap.updatePreviewWindow(previewWindowData);
     }
 
-    // function resize() {
-    //     let { innerHeight : height, innerWidth : width } = window;
-    //     threeFingerTap.height = height;
-    //     threeFingerTap.width = width;
-    // }
+    function hidePreviewWindow(event) {
+        let body = document.querySelector('body');
+        let iframe_wrapper = document.querySelector('.tft_iframe_wrapper');
+        let iframe_overlay = document.querySelector('.tft_iframe_overlay');
+        let iframe = iframe_wrapper.querySelector('iframe');
+
+        iframe_wrapper.classList.remove('show');
+        iframe_overlay.classList.remove('show');
+        body.classList.remove('noscroll');
+        iframe.setAttribute('src', '');
+    }
 
     function findQuadrant(positionBox) {
         let { left : x, top : y } = positionBox;
@@ -135,10 +140,14 @@
         };
     }
 
-    function updatePreviewWindow({ top, bottom, left, right }) {
+
+    function updatePreviewWindow({ top, bottom, left, right , src }) {
+        let body = document.querySelector('body');
         let iframe_wrapper = document.querySelector('.tft_iframe_wrapper');
         let iframe_overlay = document.querySelector('.tft_iframe_overlay');
+        let iframe = iframe_wrapper.querySelector('iframe');
 
+        body.classList.add('noscroll');
         iframe_wrapper.classList.add('show');
         iframe_overlay.classList.add('show');
 
@@ -147,7 +156,10 @@
 
         iframe_wrapper.style.left = left;
         iframe_wrapper.style.right = right;
+
+        iframe.setAttribute('src', src);
     }
+
 
     window.threeFingerTap = threeFingerTap;
 })(window);

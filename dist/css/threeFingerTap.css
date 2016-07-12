@@ -24,3 +24,6 @@
   display: none; }
   .tft_iframe_overlay.show {
     display: block; }
+
+.noscroll {
+  overflow: hidden; }

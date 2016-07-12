@@ -11,6 +11,7 @@
     threeFingerTap.init = init;
     threeFingerTap.constructDOM = constructDOM;
     threeFingerTap.showPreviewWindow = showPreviewWindow;
+    threeFingerTap.hidePreviewWindow = hidePreviewWindow;
     threeFingerTap.findQuadrant = findQuadrant;
     threeFingerTap.findPreviewWindowPosition = findPreviewWindowPosition;
     threeFingerTap.updatePreviewWindow = updatePreviewWindow;
@@ -36,7 +37,7 @@
         });
 
         var iframe_overlay = document.querySelector('.tft_iframe_overlay');
-        iframe_overlay.addEventListener('click', function (event) {});
+        iframe_overlay.addEventListener('click', threeFingerTap.hidePreviewWindow);
     }
     function init(name) {
         threeFingerTap.name = name;
@@ -63,7 +64,6 @@
     }
 
     function showPreviewWindow() {
-        console.log("showPreviewWindow");
         var positionBox = threeFingerTap.currentNode.getBoundingClientRect();
 
         var _threeFingerTap$findQ = threeFingerTap.findQuadrant(positionBox);
@@ -72,15 +72,22 @@
         var yQuadrant = _threeFingerTap$findQ.yQuadrant;
 
 
-        var positions = threeFingerTap.findPreviewWindowPosition({ xQuadrant: xQuadrant, yQuadrant: yQuadrant, positionBox: positionBox });
-        threeFingerTap.updatePreviewWindow(positions);
+        var previewWindowData = threeFingerTap.findPreviewWindowPosition({ xQuadrant: xQuadrant, yQuadrant: yQuadrant, positionBox: positionBox });
+        previewWindowData.src = threeFingerTap.currentNode.getAttribute('href');
+        threeFingerTap.updatePreviewWindow(previewWindowData);
     }
 
-    // function resize() {
-    //     let { innerHeight : height, innerWidth : width } = window;
-    //     threeFingerTap.height = height;
-    //     threeFingerTap.width = width;
-    // }
+    function hidePreviewWindow(event) {
+        var body = document.querySelector('body');
+        var iframe_wrapper = document.querySelector('.tft_iframe_wrapper');
+        var iframe_overlay = document.querySelector('.tft_iframe_overlay');
+        var iframe = iframe_wrapper.querySelector('iframe');
+
+        iframe_wrapper.classList.remove('show');
+        iframe_overlay.classList.remove('show');
+        body.classList.remove('noscroll');
+        iframe.setAttribute('src', '');
+    }
 
     function findQuadrant(positionBox) {
         var x = positionBox.left;
@@ -149,10 +156,14 @@
         var bottom = _ref2.bottom;
         var left = _ref2.left;
         var right = _ref2.right;
+        var src = _ref2.src;
 
+        var body = document.querySelector('body');
         var iframe_wrapper = document.querySelector('.tft_iframe_wrapper');
         var iframe_overlay = document.querySelector('.tft_iframe_overlay');
+        var iframe = iframe_wrapper.querySelector('iframe');
 
+        body.classList.add('noscroll');
         iframe_wrapper.classList.add('show');
         iframe_overlay.classList.add('show');
 
@@ -161,6 +172,8 @@
 
         iframe_wrapper.style.left = left;
         iframe_wrapper.style.right = right;
+
+        iframe.setAttribute('src', src);
     }
 
     window.threeFingerTap = threeFingerTap;
