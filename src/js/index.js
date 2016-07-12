@@ -4,8 +4,7 @@
     let timeout;
     
     threeFingerTap.currentNode = undefined;
-    threeFingerTap.nodes = [];
-
+    
     threeFingerTap.addEventListeners = addEventListeners;
     threeFingerTap.init = init;
     threeFingerTap.constructDOM = constructDOM;
@@ -45,8 +44,6 @@
         threeFingerTap.name = name;
         threeFingerTap.constructDOM();
         threeFingerTap.addEventListeners();
-        // let nodes = document.querySelectorAll(name);
-        // threeFingerTap.nodes = Array.from(nodes);
     }
 
     function constructDOM() {
@@ -127,7 +124,6 @@
         // var left = (0.3 * window.innerWidth) - (((0.3 * window.innerWidth) / 2) * xQuadrant);
         // var top = (0.3 * window.innerHeight) - (((0.3 * window.innerHeight) / 2) * yQuadrant);
         
-        // console.log(`left: ${left} top: ${top}`);
         console.log(`top: ${top} bottom : ${bottom}`);
         console.log(`left : ${left} right : ${right}`);
         
