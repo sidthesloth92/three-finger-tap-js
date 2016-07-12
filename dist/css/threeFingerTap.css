@@ -10,18 +10,17 @@
   background: #4b4b4b; }
   .tft_iframe_wrapper.show {
     display: block; }
-  .tft_iframe_wrapper:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 0px;
-    height: 0px;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #4a4a4a;
-    -webkit-transform: translate(-50%, -100%);
-            transform: translate(-50%, -100%); }
   .tft_iframe_wrapper iframe {
     width: 100%;
     height: 100%; }
+
+.tft_iframe_overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: none; }
+  .tft_iframe_overlay.show {
+    display: block; }

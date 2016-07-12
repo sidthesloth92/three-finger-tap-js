@@ -12,20 +12,32 @@
     //   transform: translate(-50%, 35px) !important;
       display: block;
     }
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: 0px;
-      height: 0px;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-bottom: 10px solid #4a4a4a;
-      transform: translate(-50%, -100%);
-    }
+    // &:before {
+    //   content: '';
+    //   position: absolute;
+    //   top: 0;
+    //   left: 50%;
+    //   width: 0px;
+    //   height: 0px;
+    //   border-left: 10px solid transparent;
+    //   border-right: 10px solid transparent;
+    //   border-bottom: 10px solid #4a4a4a;
+    //   transform: translate(-50%, -100%);
+    // }
     iframe {
       width: 100%;
       height: 100%;
     }
-  }
+}
+.tft_iframe_overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, .3);
+    display: none;
+    &.show {
+        display: block;
+    }
+}

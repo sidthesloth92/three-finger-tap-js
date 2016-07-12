@@ -6,14 +6,17 @@
     threeFingerTap.currentNode = undefined;
     threeFingerTap.nodes = [];
 
-    threeFingerTap.addMouseMoveListener = addMouseMoveListener;
+    threeFingerTap.addEventListeners = addEventListeners;
     threeFingerTap.init = init;
-    threeFingerTap.constructIframe = constructIframe;
+    threeFingerTap.constructDOM = constructDOM;
     threeFingerTap.showPreviewWindow = showPreviewWindow;
-    // threeFingerTap.resize = resize;
     threeFingerTap.findQuadrant = findQuadrant;
+    threeFingerTap.findPreviewWindowPosition = findPreviewWindowPosition;
+    threeFingerTap.updatePreviewWindow = updatePreviewWindow;
+    // threeFingerTap.resize = resize;
     
-    function addMouseMoveListener() {
+    
+    function addEventListeners() {
        window.addEventListener('mousemove', (event) => {
             if(event.target.classList.contains(threeFingerTap.name)) {
                 console.log("in here");
@@ -32,28 +35,45 @@
                 clearTimeout(timeout);
             }
         });
+
+        let iframe_overlay = document.querySelector('.tft_iframe_overlay');
+        iframe_overlay.addEventListener('click', (event) => {
+            
+        });
     }
     function init(name) {
         threeFingerTap.name = name;
-        threeFingerTap.addMouseMoveListener();
-        threeFingerTap.constructIframe();
+        threeFingerTap.constructDOM();
+        threeFingerTap.addEventListeners();
         // let nodes = document.querySelectorAll(name);
         // threeFingerTap.nodes = Array.from(nodes);
     }
 
-    function constructIframe() {
+    function constructDOM() {
+
+        var fragment = document.createDocumentFragment();
+
+        var iframeOverlay = document.createElement('div');
+        iframeOverlay.classList.add('tft_iframe_overlay');
+        fragment.appendChild(iframeOverlay);
+        
         var iframeWrapper = document.createElement('div');
         iframeWrapper.classList.add('tft_iframe_wrapper');
 
         var iframe = document.createElement('iframe');
         iframeWrapper.appendChild(iframe);
 
-        document.querySelector('body').appendChild(iframeWrapper);
+        fragment.appendChild(iframeWrapper);
+        document.querySelector('body').appendChild(fragment);
     }
 
     function showPreviewWindow() {
         console.log("showPreviewWindow");
-        threeFingerTap.findQuadrant(threeFingerTap.currentNode);
+        let positionBox = threeFingerTap.currentNode.getBoundingClientRect();
+        let { xQuadrant, yQuadrant } = threeFingerTap.findQuadrant(positionBox);
+        
+        let positions = threeFingerTap.findPreviewWindowPosition({ xQuadrant, yQuadrant, positionBox });
+        threeFingerTap.updatePreviewWindow(positions);
     }
 
     // function resize() {
@@ -62,9 +82,7 @@
     //     threeFingerTap.width = width;
     // }
 
-    function findQuadrant(element) {
-        let positionBox = element.getBoundingClientRect();
-        console.dir(positionBox);
+    function findQuadrant(positionBox) {
         let { left : x, top : y } = positionBox;
         console.log(x, y);
 
@@ -73,9 +91,17 @@
 
         let xQuadrant = (x < (window.innerWidth / 3)) ? 0 : (x < (window.innerWidth / 3 * 2)) ? 1 : 2;
         let yQuadrant = (y < (window.innerHeight / 2)) ? 0 : 1;
-        console.log(xQuadrant, yQuadrant);
+        console.log(`xQuadrant: ${xQuadrant}, yQuadrant : ${yQuadrant}`);
 
-        var top, bottom, left, right;
+        return {
+            xQuadrant,
+            yQuadrant
+        };
+    }
+
+    function findPreviewWindowPosition({ xQuadrant, yQuadrant, positionBox }) {
+
+        let top, bottom, left, right;
 
         if(xQuadrant === 0) {
             left = positionBox.left + 'px';
@@ -89,14 +115,12 @@
             left = "";
             right = (window.innerWidth - positionBox.right) + 'px';
         }
-        console.log("left " + left + " right : " + right);
+        
         if(!yQuadrant) {
-            console.log("The element is the top quadrant");
             top = positionBox.top + positionBox.height + 10 + 'px';
             bottom = "";
         }
         else {
-            console.log("The element is the bottom quadrant");
             top = "";
             bottom = (window.innerHeight - positionBox.top + 10) + 'px';
         }
@@ -104,17 +128,30 @@
         // var top = (0.3 * window.innerHeight) - (((0.3 * window.innerHeight) / 2) * yQuadrant);
         
         // console.log(`left: ${left} top: ${top}`);
+        console.log(`top: ${top} bottom : ${bottom}`);
+        console.log(`left : ${left} right : ${right}`);
+        
+        return  {
+            top,
+            right,
+            bottom,
+            left
+        };
+    }
 
+    function updatePreviewWindow({ top, bottom, left, right }) {
         let iframe_wrapper = document.querySelector('.tft_iframe_wrapper');
+        let iframe_overlay = document.querySelector('.tft_iframe_overlay');
+
         iframe_wrapper.classList.add('show');
-       
-        console.log(top, bottom);
+        iframe_overlay.classList.add('show');
+
         iframe_wrapper.style.top = top;
         iframe_wrapper.style.bottom = bottom;
 
-        console.log("left " + left + " right : " + right);
         iframe_wrapper.style.left = left;
         iframe_wrapper.style.right = right;
     }
+
     window.threeFingerTap = threeFingerTap;
 })(window);
