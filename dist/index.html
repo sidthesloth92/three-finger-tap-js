@@ -1,18 +1,63 @@
 <!DOCTYPE html>
-<html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Three Finger Tap JS</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/threeFingerTap.css">
-    </head>
-    <body>
-       <div class="outer">
-           <div class="inner">This is the text</div>
-       </div>
+<html class="no-js">
+<!--<![endif]-->
 
-       <script type="text/javascript" src="js/threeFingerTap.js"></script>
-    </body>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Three Finger Tap JS</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/threeFingerTap.css">
+    <style>
+        .layout {
+           
+        }
+        .outer {
+            display: inline-block;
+            justify-content: center;
+            align-items: center;
+            width: 30vw;
+            height: 33vh;
+            text-align: center;
+            padding-top: 50px;
+        }
+        .three-finger-tap {
+            display: inline-block;
+            width: 100px;
+            padding: 5px;
+            background: red;
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="layout">
+        <div class="outer"><a class="three-finger-tap" href="https://google.com">One</a></div>
+        <div class="outer"><a class="three-finger-tap" href="https://google.com">Two</a></div>
+        <div class="outer"><a class="three-finger-tap" href="https://google.com">Three</a></div>
+        <div class="outer"><a class="three-finger-tap" href="https://google.com">Four</a></div>
+        <div class="outer"><a class="three-finger-tap" href="https://google.com">Five</a></div>
+        <div class="outer"><a class="three-finger-tap" href="https://google.com">Six</a></div>
+        <div class="outer"><a class="three-finger-tap" href="https://google.com">Seven</a></div>
+        <div class="outer"><a class="three-finger-tap" href="https://google.com">Eight</a></div>
+        <div class="outer"><a class="three-finger-tap" href="https://google.com">Nine</a></div>
+        <div class="outer"><a class="three-finger-tap" href="https://google.com">Ten</a></div>
+        <div class="outer"><a class="three-finger-tap" href="https://google.com">Eleven</a></div>
+    </div>
+    <!--<div class="tft_iframe_wrapper">
+        <iframe src=""></iframe>
+    </div>-->
+    <div class="iframe_overlay"></div>
+    <script type="text/javascript" src="js/threeFingerTap.js"></script>
+    <script type="text/javascript">
+            window.addEventListener('DOMContentLoaded', function() {
+                window.threeFingerTap.init('three-finger-tap');
+            });
+       </script>
+</body>
+
 </html>
