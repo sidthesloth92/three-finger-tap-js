@@ -28,6 +28,19 @@
       width: 100%;
       height: 100%;
     }
+    .loader {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        left: 50%;
+        top: 50%;
+        border-radius: 50%;
+        border: 5px solid rgba(0, 0, 0, 0);
+        border-top-color: rgba(255, 255, 255, 0.4);
+        transform: translate(-50%, -50%);
+        z-index: -1;
+        animation: spin 2s linear infinite;
+    }
 }
 .tft_iframe_overlay {
     position: fixed;
@@ -35,7 +48,6 @@
     top: 0;
     bottom: 0;
     right: 0;
-    background: rgba(0, 0, 0, .3);
     display: none;
     &.show {
         display: block;
@@ -44,3 +56,9 @@
 .noscroll {
     overflow: hidden;
 }
+
+@keyframes spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+    

@@ -59,6 +59,10 @@
         var iframe = document.createElement('iframe');
         iframeWrapper.appendChild(iframe);
 
+        var loader = document.createElement('div');
+        loader.classList.add('loader');
+        iframeWrapper.appendChild(loader);
+
         fragment.appendChild(iframeWrapper);
         document.querySelector('body').appendChild(fragment);
     }
