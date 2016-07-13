@@ -1,51 +1,19 @@
 ((window) => {
     
-    let threeFingerTap  = {};
-    let timeout;
-    
-    threeFingerTap.currentNode = undefined;
-    
-    threeFingerTap.addEventListeners = addEventListeners;
-    threeFingerTap.init = init;
-    threeFingerTap.constructDOM = constructDOM;
-    threeFingerTap.showPreviewWindow = showPreviewWindow;
-    threeFingerTap.hidePreviewWindow = hidePreviewWindow;
-    threeFingerTap.findQuadrant = findQuadrant;
-    threeFingerTap.findPreviewWindowPosition = findPreviewWindowPosition;
-    threeFingerTap.updatePreviewWindow = updatePreviewWindow;
-    // threeFingerTap.resize = resize;
-    
-    
-    function addEventListeners() {
-       window.addEventListener('mousemove', (event) => {
-            if(event.target.classList.contains(threeFingerTap.name)) {
-                console.log("in here");
-                if(!threeFingerTap.currentNode) {
-                    threeFingerTap.currentNode = event.target;
+    // Private variables
+    let _currentNode;
+    let _timeout;
+    let _name;
 
-                    timeout = setTimeout(() => {
-                        if(threeFingerTap.currentNode && threeFingerTap.currentNode.classList.contains(threeFingerTap.name)) {
-                            threeFingerTap.showPreviewWindow();
-                        }
-                    }, 2000);
-                }
-            }
-            else {
-                threeFingerTap.currentNode = undefined;
-                clearTimeout(timeout);
-            }
-        });
-
-        let iframe_overlay = document.querySelector('body');
-        iframe_overlay.addEventListener('click', threeFingerTap.hidePreviewWindow);
-    }
+    // API Methods
     function init(name) {
-        threeFingerTap.name = name;
-        threeFingerTap.constructDOM();
-        threeFingerTap.addEventListeners();
+        _name = name;
+        _constructDOM();
+        _addEventListeners();
     }
 
-    function constructDOM() {
+    // Private Methods
+    function _constructDOM() {
 
         var fragment = document.createDocumentFragment();
 
@@ -63,16 +31,41 @@
         document.querySelector('body').appendChild(fragment);
     }
 
-    function showPreviewWindow() {
-        let positionBox = threeFingerTap.currentNode.getBoundingClientRect();
-        let { xQuadrant, yQuadrant } = threeFingerTap.findQuadrant(positionBox);
+    function _addEventListeners() {
+       window.addEventListener('mousemove', (event) => {
+            if(event.target.classList.contains(_name)) {
+                if(!_currentNode) {
+                    _currentNode = event.target;
+
+                    _timeout = setTimeout(() => {
+                        if(_currentNode && _currentNode.classList.contains(_name)) {
+                            _showPreviewWindow();
+                        }
+                    }, threeFingerTap.hoverTimeout);
+                }
+            }
+            else {
+                _currentNode = undefined;
+                clearTimeout(_timeout);
+            }
+        });
+
+        let iframe_overlay = document.querySelector('body');
+        iframe_overlay.addEventListener('click', _hidePreviewWindow);
+    }
+    
+    
+
+    function _showPreviewWindow() {
+        let positionBox = _currentNode.getBoundingClientRect();
+        let { xQuadrant, yQuadrant } = _findQuadrant(positionBox);
         
-        let previewWindowData = threeFingerTap.findPreviewWindowPosition({ xQuadrant, yQuadrant, positionBox });
-        previewWindowData.src = threeFingerTap.currentNode.getAttribute('href');
-        threeFingerTap.updatePreviewWindow(previewWindowData);
+        let previewWindowData = _findPreviewWindowPosition({ xQuadrant, yQuadrant, positionBox });
+        previewWindowData.src = _currentNode.getAttribute('href');
+        _updatePreviewWindow(previewWindowData);
     }
 
-    function hidePreviewWindow(event) {
+    function _hidePreviewWindow(event) {
         let body = document.querySelector('body');
         let iframe_wrapper = document.querySelector('.tft_iframe_wrapper');
         let iframe_overlay = document.querySelector('.tft_iframe_overlay');
@@ -84,7 +77,7 @@
         iframe.setAttribute('src', '');
     }
 
-    function findQuadrant(positionBox) {
+    function _findQuadrant(positionBox) {
         let { left : x, top : y } = positionBox;
         console.log(x, y);
 
@@ -101,7 +94,7 @@
         };
     }
 
-    function findPreviewWindowPosition({ xQuadrant, yQuadrant, positionBox }) {
+    function _findPreviewWindowPosition({ xQuadrant, yQuadrant, positionBox }) {
 
         let top, bottom, left, right;
 
@@ -140,8 +133,7 @@
         };
     }
 
-
-    function updatePreviewWindow({ top, bottom, left, right , src }) {
+    function _updatePreviewWindow({ top, bottom, left, right , src }) {
         let body = document.querySelector('body');
         let iframe_wrapper = document.querySelector('.tft_iframe_wrapper');
         let iframe_overlay = document.querySelector('.tft_iframe_overlay');
@@ -160,6 +152,9 @@
         iframe.setAttribute('src', src);
     }
 
-
+    var threeFingerTap = {
+        init,
+        hoverTimeout : 2000
+    };
     window.threeFingerTap = threeFingerTap;
 })(window);

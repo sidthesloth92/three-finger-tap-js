@@ -2,50 +2,20 @@
 
 (function (window) {
 
-    var threeFingerTap = {};
-    var timeout = void 0;
+    // Private variables
+    var _currentNode = void 0;
+    var _timeout = void 0;
+    var _name = void 0;
 
-    threeFingerTap.currentNode = undefined;
-
-    threeFingerTap.addEventListeners = addEventListeners;
-    threeFingerTap.init = init;
-    threeFingerTap.constructDOM = constructDOM;
-    threeFingerTap.showPreviewWindow = showPreviewWindow;
-    threeFingerTap.hidePreviewWindow = hidePreviewWindow;
-    threeFingerTap.findQuadrant = findQuadrant;
-    threeFingerTap.findPreviewWindowPosition = findPreviewWindowPosition;
-    threeFingerTap.updatePreviewWindow = updatePreviewWindow;
-    // threeFingerTap.resize = resize;
-
-    function addEventListeners() {
-        window.addEventListener('mousemove', function (event) {
-            if (event.target.classList.contains(threeFingerTap.name)) {
-                console.log("in here");
-                if (!threeFingerTap.currentNode) {
-                    threeFingerTap.currentNode = event.target;
-
-                    timeout = setTimeout(function () {
-                        if (threeFingerTap.currentNode && threeFingerTap.currentNode.classList.contains(threeFingerTap.name)) {
-                            threeFingerTap.showPreviewWindow();
-                        }
-                    }, 2000);
-                }
-            } else {
-                threeFingerTap.currentNode = undefined;
-                clearTimeout(timeout);
-            }
-        });
-
-        var iframe_overlay = document.querySelector('body');
-        iframe_overlay.addEventListener('click', threeFingerTap.hidePreviewWindow);
-    }
+    // API Methods
     function init(name) {
-        threeFingerTap.name = name;
-        threeFingerTap.constructDOM();
-        threeFingerTap.addEventListeners();
+        _name = name;
+        _constructDOM();
+        _addEventListeners();
     }
 
-    function constructDOM() {
+    // Private Methods
+    function _constructDOM() {
 
         var fragment = document.createDocumentFragment();
 
@@ -63,21 +33,43 @@
         document.querySelector('body').appendChild(fragment);
     }
 
-    function showPreviewWindow() {
-        var positionBox = threeFingerTap.currentNode.getBoundingClientRect();
+    function _addEventListeners() {
+        window.addEventListener('mousemove', function (event) {
+            if (event.target.classList.contains(_name)) {
+                if (!_currentNode) {
+                    _currentNode = event.target;
 
-        var _threeFingerTap$findQ = threeFingerTap.findQuadrant(positionBox);
+                    _timeout = setTimeout(function () {
+                        if (_currentNode && _currentNode.classList.contains(_name)) {
+                            _showPreviewWindow();
+                        }
+                    }, threeFingerTap.hoverTimeout);
+                }
+            } else {
+                _currentNode = undefined;
+                clearTimeout(_timeout);
+            }
+        });
 
-        var xQuadrant = _threeFingerTap$findQ.xQuadrant;
-        var yQuadrant = _threeFingerTap$findQ.yQuadrant;
-
-
-        var previewWindowData = threeFingerTap.findPreviewWindowPosition({ xQuadrant: xQuadrant, yQuadrant: yQuadrant, positionBox: positionBox });
-        previewWindowData.src = threeFingerTap.currentNode.getAttribute('href');
-        threeFingerTap.updatePreviewWindow(previewWindowData);
+        var iframe_overlay = document.querySelector('body');
+        iframe_overlay.addEventListener('click', _hidePreviewWindow);
     }
 
-    function hidePreviewWindow(event) {
+    function _showPreviewWindow() {
+        var positionBox = _currentNode.getBoundingClientRect();
+
+        var _findQuadrant2 = _findQuadrant(positionBox);
+
+        var xQuadrant = _findQuadrant2.xQuadrant;
+        var yQuadrant = _findQuadrant2.yQuadrant;
+
+
+        var previewWindowData = _findPreviewWindowPosition({ xQuadrant: xQuadrant, yQuadrant: yQuadrant, positionBox: positionBox });
+        previewWindowData.src = _currentNode.getAttribute('href');
+        _updatePreviewWindow(previewWindowData);
+    }
+
+    function _hidePreviewWindow(event) {
         var body = document.querySelector('body');
         var iframe_wrapper = document.querySelector('.tft_iframe_wrapper');
         var iframe_overlay = document.querySelector('.tft_iframe_overlay');
@@ -89,7 +81,7 @@
         iframe.setAttribute('src', '');
     }
 
-    function findQuadrant(positionBox) {
+    function _findQuadrant(positionBox) {
         var x = positionBox.left;
         var y = positionBox.top;
 
@@ -108,7 +100,7 @@
         };
     }
 
-    function findPreviewWindowPosition(_ref) {
+    function _findPreviewWindowPosition(_ref) {
         var xQuadrant = _ref.xQuadrant;
         var yQuadrant = _ref.yQuadrant;
         var positionBox = _ref.positionBox;
@@ -151,7 +143,7 @@
         };
     }
 
-    function updatePreviewWindow(_ref2) {
+    function _updatePreviewWindow(_ref2) {
         var top = _ref2.top;
         var bottom = _ref2.bottom;
         var left = _ref2.left;
@@ -176,5 +168,9 @@
         iframe.setAttribute('src', src);
     }
 
+    var threeFingerTap = {
+        init: init,
+        hoverTimeout: 2000
+    };
     window.threeFingerTap = threeFingerTap;
 })(window);
