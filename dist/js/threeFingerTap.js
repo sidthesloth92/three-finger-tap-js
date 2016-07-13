@@ -36,7 +36,7 @@
             }
         });
 
-        var iframe_overlay = document.querySelector('.tft_iframe_overlay');
+        var iframe_overlay = document.querySelector('body');
         iframe_overlay.addEventListener('click', threeFingerTap.hidePreviewWindow);
     }
     function init(name) {
@@ -48,10 +48,6 @@
     function constructDOM() {
 
         var fragment = document.createDocumentFragment();
-
-        var iframeOverlay = document.createElement('div');
-        iframeOverlay.classList.add('tft_iframe_overlay');
-        fragment.appendChild(iframeOverlay);
 
         var iframeWrapper = document.createElement('div');
         iframeWrapper.classList.add('tft_iframe_wrapper');
