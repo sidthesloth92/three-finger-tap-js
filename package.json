@@ -21,7 +21,7 @@
     "watch:js": "onchange 'src/**/*.js' -- npm run build:js:dev",
     "watch:css": "onchange 'src/**/*.scss' -- npm run build:css:dev",
     "watch": "parallelshell 'npm run watch:js' 'npm run watch:css'",
-    "start" : "parallelshell 'npm run watch' 'live-server --open=dist'",
+    "start" : "parallelshell 'npm run watch' 'live-server --open=test'",
     "commit": "git-cz",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },

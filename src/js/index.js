@@ -5,11 +5,33 @@
     let _timeout;
     let _name;
 
+    // API variables
+    let _hoverTimeout = 2000;
+    let _customLoadingBackground;
+
     // API Methods
-    function init(name) {
+    function init({ name, hoverTimeout, customLoadingBackground}) {
         _name = name;
+        _hoverTimeout = hoverTimeout;
+        _customLoadingBackground = customLoadingBackground;
         _constructDOM();
         _addEventListeners();
+    }
+
+    function setHoverTimeout(hoverTimeout) {
+        _hoverTimeout = hoverTimeout;
+    }
+
+    function getHoverTimeout() {
+        return _hoverTimeout;
+    }
+
+    function setCustomLoadingBackground(customLoadingBackground) {
+        _customLoadingBackground = customLoadingBackground;
+    }
+    
+    function getCustomLoadingBackground() {
+        return _customLoadingBackground;
     }
 
     // Private Methods
@@ -23,9 +45,14 @@
         var iframe = document.createElement('iframe');
         iframeWrapper.appendChild(iframe);
         
-        var loader = document.createElement('div');
-        loader.classList.add('loader');
-        iframeWrapper.appendChild(loader);
+        if(!_customLoadingBackground) {
+            var loader = document.createElement('div');
+            loader.classList.add('loader');
+            iframeWrapper.appendChild(loader);
+        }
+        else {
+            iframeWrapper.style.backgroundImage = _customLoadingBackground;
+        }
 
         fragment.appendChild(iframeWrapper);
         document.querySelector('body').appendChild(fragment);
@@ -41,7 +68,7 @@
                         if(_currentNode && _currentNode.classList.contains(_name)) {
                             _showPreviewWindow();
                         }
-                    }, threeFingerTap.hoverTimeout);
+                    }, _hoverTimeout);
                 }
             }
             else {
@@ -50,8 +77,8 @@
             }
         });
 
-        let iframe_overlay = document.querySelector('body');
-        iframe_overlay.addEventListener('click', _hidePreviewWindow);
+        let body = document.querySelector('body');
+        body.addEventListener('click', _hidePreviewWindow);
     }
     
     
@@ -68,13 +95,13 @@
     function _hidePreviewWindow(event) {
         let body = document.querySelector('body');
         let iframe_wrapper = document.querySelector('.tft_iframe_wrapper');
-        let iframe_overlay = document.querySelector('.tft_iframe_overlay');
         let iframe = iframe_wrapper.querySelector('iframe');
 
         iframe_wrapper.classList.remove('show');
-        iframe_overlay.classList.remove('show');
-        body.classList.remove('noscroll');
+        iframe_wrapper.style.left = "";
+        iframe_wrapper.style.top = "";
         iframe.setAttribute('src', '');
+        body.classList.remove('noscroll');
     }
 
     function _findQuadrant(positionBox) {
@@ -136,12 +163,10 @@
     function _updatePreviewWindow({ top, bottom, left, right , src }) {
         let body = document.querySelector('body');
         let iframe_wrapper = document.querySelector('.tft_iframe_wrapper');
-        let iframe_overlay = document.querySelector('.tft_iframe_overlay');
         let iframe = iframe_wrapper.querySelector('iframe');
 
         body.classList.add('noscroll');
         iframe_wrapper.classList.add('show');
-        iframe_overlay.classList.add('show');
 
         iframe_wrapper.style.top = top;
         iframe_wrapper.style.bottom = bottom;
@@ -154,7 +179,10 @@
 
     var threeFingerTap = {
         init,
-        hoverTimeout : 2000
+        getHoverTimeout,
+        setHoverTimeout,
+        getCustomLoadingBackground,
+        setCustomLoadingBackground
     };
     window.threeFingerTap = threeFingerTap;
 })(window);

@@ -7,11 +7,37 @@
     var _timeout = void 0;
     var _name = void 0;
 
+    // API variables
+    var _hoverTimeout = 2000;
+    var _customLoadingBackground = void 0;
+
     // API Methods
-    function init(name) {
+    function init(_ref) {
+        var name = _ref.name;
+        var hoverTimeout = _ref.hoverTimeout;
+        var customLoadingBackground = _ref.customLoadingBackground;
+
         _name = name;
+        _hoverTimeout = hoverTimeout;
+        _customLoadingBackground = customLoadingBackground;
         _constructDOM();
         _addEventListeners();
+    }
+
+    function setHoverTimeout(hoverTimeout) {
+        _hoverTimeout = hoverTimeout;
+    }
+
+    function getHoverTimeout() {
+        return _hoverTimeout;
+    }
+
+    function setCustomLoadingBackground(customLoadingBackground) {
+        _customLoadingBackground = customLoadingBackground;
+    }
+
+    function getCustomLoadingBackground() {
+        return _customLoadingBackground;
     }
 
     // Private Methods
@@ -25,9 +51,13 @@
         var iframe = document.createElement('iframe');
         iframeWrapper.appendChild(iframe);
 
-        var loader = document.createElement('div');
-        loader.classList.add('loader');
-        iframeWrapper.appendChild(loader);
+        if (!_customLoadingBackground) {
+            var loader = document.createElement('div');
+            loader.classList.add('loader');
+            iframeWrapper.appendChild(loader);
+        } else {
+            iframeWrapper.style.backgroundImage = _customLoadingBackground;
+        }
 
         fragment.appendChild(iframeWrapper);
         document.querySelector('body').appendChild(fragment);
@@ -43,7 +73,7 @@
                         if (_currentNode && _currentNode.classList.contains(_name)) {
                             _showPreviewWindow();
                         }
-                    }, threeFingerTap.hoverTimeout);
+                    }, _hoverTimeout);
                 }
             } else {
                 _currentNode = undefined;
@@ -51,8 +81,8 @@
             }
         });
 
-        var iframe_overlay = document.querySelector('body');
-        iframe_overlay.addEventListener('click', _hidePreviewWindow);
+        var body = document.querySelector('body');
+        body.addEventListener('click', _hidePreviewWindow);
     }
 
     function _showPreviewWindow() {
@@ -72,13 +102,13 @@
     function _hidePreviewWindow(event) {
         var body = document.querySelector('body');
         var iframe_wrapper = document.querySelector('.tft_iframe_wrapper');
-        var iframe_overlay = document.querySelector('.tft_iframe_overlay');
         var iframe = iframe_wrapper.querySelector('iframe');
 
         iframe_wrapper.classList.remove('show');
-        iframe_overlay.classList.remove('show');
-        body.classList.remove('noscroll');
+        iframe_wrapper.style.left = "";
+        iframe_wrapper.style.top = "";
         iframe.setAttribute('src', '');
+        body.classList.remove('noscroll');
     }
 
     function _findQuadrant(positionBox) {
@@ -100,10 +130,10 @@
         };
     }
 
-    function _findPreviewWindowPosition(_ref) {
-        var xQuadrant = _ref.xQuadrant;
-        var yQuadrant = _ref.yQuadrant;
-        var positionBox = _ref.positionBox;
+    function _findPreviewWindowPosition(_ref2) {
+        var xQuadrant = _ref2.xQuadrant;
+        var yQuadrant = _ref2.yQuadrant;
+        var positionBox = _ref2.positionBox;
 
 
         var top = void 0,
@@ -143,21 +173,19 @@
         };
     }
 
-    function _updatePreviewWindow(_ref2) {
-        var top = _ref2.top;
-        var bottom = _ref2.bottom;
-        var left = _ref2.left;
-        var right = _ref2.right;
-        var src = _ref2.src;
+    function _updatePreviewWindow(_ref3) {
+        var top = _ref3.top;
+        var bottom = _ref3.bottom;
+        var left = _ref3.left;
+        var right = _ref3.right;
+        var src = _ref3.src;
 
         var body = document.querySelector('body');
         var iframe_wrapper = document.querySelector('.tft_iframe_wrapper');
-        var iframe_overlay = document.querySelector('.tft_iframe_overlay');
         var iframe = iframe_wrapper.querySelector('iframe');
 
         body.classList.add('noscroll');
         iframe_wrapper.classList.add('show');
-        iframe_overlay.classList.add('show');
 
         iframe_wrapper.style.top = top;
         iframe_wrapper.style.bottom = bottom;
@@ -170,7 +198,10 @@
 
     var threeFingerTap = {
         init: init,
-        hoverTimeout: 2000
+        getHoverTimeout: getHoverTimeout,
+        setHoverTimeout: setHoverTimeout,
+        getCustomLoadingBackground: getCustomLoadingBackground,
+        setCustomLoadingBackground: setCustomLoadingBackground
     };
     window.threeFingerTap = threeFingerTap;
 })(window);
