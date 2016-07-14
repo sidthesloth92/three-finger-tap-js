@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 (function (window) {
 
@@ -17,14 +17,28 @@
         var hoverTimeout = _ref.hoverTimeout;
         var customLoadingBackground = _ref.customLoadingBackground;
 
-        _name = name;
-        _hoverTimeout = hoverTimeout;
-        _customLoadingBackground = customLoadingBackground;
+        setName(name);
+        setHoverTimeout(hoverTimeout);
+        setCustomLoadingBackground(customLoadingBackground);
         _constructDOM();
         _addEventListeners();
     }
 
+    function setName(name) {
+        if (!name) {
+            throw new Error("Name not specified");
+        }
+        _name = name;
+    }
+
+    function getName() {
+        return _name;
+    }
+
     function setHoverTimeout(hoverTimeout) {
+        if (isNaN(hoverTimeout)) {
+            throw new Error("hoverTimeout should have a numerical value");
+        }
         _hoverTimeout = hoverTimeout;
     }
 
@@ -33,7 +47,14 @@
     }
 
     function setCustomLoadingBackground(customLoadingBackground) {
+        var tempDiv = document.createElement('div');
+        tempDiv.style.backgroundImage = customLoadingBackground;
+
+        if (tempDiv.style.backgroundImage && !customLoadingBackground) {
+            throw new Error("Invalid value for customLoadingBackground. Must be a possible value for CSS backgroundImage property");
+        }
         _customLoadingBackground = customLoadingBackground;
+        _updateCustomLoadingBackground();
     }
 
     function getCustomLoadingBackground() {
@@ -51,16 +72,31 @@
         var iframe = document.createElement('iframe');
         iframeWrapper.appendChild(iframe);
 
-        if (!_customLoadingBackground) {
-            var loader = document.createElement('div');
-            loader.classList.add('loader');
-            iframeWrapper.appendChild(loader);
-        } else {
-            iframeWrapper.style.backgroundImage = _customLoadingBackground;
-        }
-
         fragment.appendChild(iframeWrapper);
         document.querySelector('body').appendChild(fragment);
+
+        _updateCustomLoadingBackground();
+    }
+
+    function _updateCustomLoadingBackground() {
+        var iframeWrapper = document.querySelector('.tft_iframe_wrapper');
+
+        if (iframeWrapper) {
+            if (!_customLoadingBackground) {
+                iframeWrapper.style.backgroundImage = "";
+
+                var loader = document.createElement('div');
+                loader.classList.add('loader');
+                iframeWrapper.appendChild(loader);
+            } else {
+                var _loader = iframeWrapper.querySelector('.loader');
+                if (_loader) {
+                    _loader.remove();
+                }
+
+                iframeWrapper.style.backgroundImage = _customLoadingBackground;
+            }
+        }
     }
 
     function _addEventListeners() {
@@ -68,7 +104,6 @@
             if (event.target.classList.contains(_name)) {
                 if (!_currentNode) {
                     _currentNode = event.target;
-
                     _timeout = setTimeout(function () {
                         if (_currentNode && _currentNode.classList.contains(_name)) {
                             _showPreviewWindow();
@@ -122,7 +157,7 @@
 
         var xQuadrant = x < window.innerWidth / 3 ? 0 : x < window.innerWidth / 3 * 2 ? 1 : 2;
         var yQuadrant = y < window.innerHeight / 2 ? 0 : 1;
-        console.log('xQuadrant: ' + xQuadrant + ', yQuadrant : ' + yQuadrant);
+        console.log("xQuadrant: " + xQuadrant + ", yQuadrant : " + yQuadrant);
 
         return {
             xQuadrant: xQuadrant,
@@ -162,8 +197,8 @@
         // var left = (0.3 * window.innerWidth) - (((0.3 * window.innerWidth) / 2) * xQuadrant);
         // var top = (0.3 * window.innerHeight) - (((0.3 * window.innerHeight) / 2) * yQuadrant);
 
-        console.log('top: ' + top + ' bottom : ' + bottom);
-        console.log('left : ' + left + ' right : ' + right);
+        console.log("top: " + top + " bottom : " + bottom);
+        console.log("left : " + left + " right : " + right);
 
         return {
             top: top,
@@ -198,6 +233,8 @@
 
     var threeFingerTap = {
         init: init,
+        setName: setName,
+        getName: getName,
         getHoverTimeout: getHoverTimeout,
         setHoverTimeout: setHoverTimeout,
         getCustomLoadingBackground: getCustomLoadingBackground,

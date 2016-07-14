@@ -1,5 +1,5 @@
 ((window) => {
-    
+
     // Private variables
     let _currentNode;
     let _timeout;
@@ -11,14 +11,28 @@
 
     // API Methods
     function init({ name, hoverTimeout, customLoadingBackground}) {
-        _name = name;
-        _hoverTimeout = hoverTimeout;
-        _customLoadingBackground = customLoadingBackground;
+        setName(name);
+        setHoverTimeout(hoverTimeout);
+        setCustomLoadingBackground(customLoadingBackground);
         _constructDOM();
         _addEventListeners();
     }
 
+    function setName(name) {
+        if (!name) {
+            throw new Error("Name not specified");
+        }
+        _name = name;
+    }
+
+    function getName() {
+        return _name;
+    }
+
     function setHoverTimeout(hoverTimeout) {
+        if (isNaN(hoverTimeout)) {
+            throw new Error("hoverTimeout should have a numerical value");
+        }
         _hoverTimeout = hoverTimeout;
     }
 
@@ -27,9 +41,16 @@
     }
 
     function setCustomLoadingBackground(customLoadingBackground) {
+        let tempDiv = document.createElement('div');
+        tempDiv.style.backgroundImage = customLoadingBackground;
+
+        if (tempDiv.style.backgroundImage && !customLoadingBackground) {
+            throw new Error("Invalid value for customLoadingBackground. Must be a possible value for CSS backgroundImage property");
+        }
         _customLoadingBackground = customLoadingBackground;
+        _updateCustomLoadingBackground();
     }
-    
+
     function getCustomLoadingBackground() {
         return _customLoadingBackground;
     }
@@ -44,28 +65,42 @@
 
         var iframe = document.createElement('iframe');
         iframeWrapper.appendChild(iframe);
-        
-        if(!_customLoadingBackground) {
-            var loader = document.createElement('div');
-            loader.classList.add('loader');
-            iframeWrapper.appendChild(loader);
-        }
-        else {
-            iframeWrapper.style.backgroundImage = _customLoadingBackground;
-        }
 
         fragment.appendChild(iframeWrapper);
         document.querySelector('body').appendChild(fragment);
+
+        _updateCustomLoadingBackground();
+    }
+
+    function _updateCustomLoadingBackground() {
+        let iframeWrapper = document.querySelector('.tft_iframe_wrapper');
+
+        if (iframeWrapper) {
+            if (!_customLoadingBackground) {
+                iframeWrapper.style.backgroundImage = "";
+
+                let loader = document.createElement('div');
+                loader.classList.add('loader');
+                iframeWrapper.appendChild(loader);
+            }
+            else {
+                let loader = iframeWrapper.querySelector('.loader');
+                if(loader) {
+                    loader.remove();
+                }
+
+                iframeWrapper.style.backgroundImage = _customLoadingBackground;
+            }
+        }
     }
 
     function _addEventListeners() {
-       window.addEventListener('mousemove', (event) => {
-            if(event.target.classList.contains(_name)) {
-                if(!_currentNode) {
+        window.addEventListener('mousemove', (event) => {
+            if (event.target.classList.contains(_name)) {
+                if (!_currentNode) {
                     _currentNode = event.target;
-
                     _timeout = setTimeout(() => {
-                        if(_currentNode && _currentNode.classList.contains(_name)) {
+                        if (_currentNode && _currentNode.classList.contains(_name)) {
                             _showPreviewWindow();
                         }
                     }, _hoverTimeout);
@@ -80,13 +115,13 @@
         let body = document.querySelector('body');
         body.addEventListener('click', _hidePreviewWindow);
     }
-    
-    
+
+
 
     function _showPreviewWindow() {
         let positionBox = _currentNode.getBoundingClientRect();
         let { xQuadrant, yQuadrant } = _findQuadrant(positionBox);
-        
+
         let previewWindowData = _findPreviewWindowPosition({ xQuadrant, yQuadrant, positionBox });
         previewWindowData.src = _currentNode.getAttribute('href');
         _updatePreviewWindow(previewWindowData);
@@ -105,7 +140,7 @@
     }
 
     function _findQuadrant(positionBox) {
-        let { left : x, top : y } = positionBox;
+        let { left: x, top: y } = positionBox;
         console.log(x, y);
 
         // var xQuadrant = (x < (window.innerWidth / 3)) ? 0 : (x < (window.innerWidth / 3 * 2)) ? 1 : 2;
@@ -125,20 +160,20 @@
 
         let top, bottom, left, right;
 
-        if(xQuadrant === 0) {
+        if (xQuadrant === 0) {
             left = positionBox.left + 'px';
             right = "";
         }
-        else if(xQuadrant === 1) {
+        else if (xQuadrant === 1) {
             left = (positionBox.left - ((window.innerWidth * 0.7) / 2) + (positionBox.width / 2)) + 'px';
             right = "";
         }
-        else if(xQuadrant === 2) {
+        else if (xQuadrant === 2) {
             left = "";
             right = (window.innerWidth - positionBox.right) + 'px';
         }
-        
-        if(!yQuadrant) {
+
+        if (!yQuadrant) {
             top = positionBox.top + positionBox.height + 10 + 'px';
             bottom = "";
         }
@@ -148,11 +183,11 @@
         }
         // var left = (0.3 * window.innerWidth) - (((0.3 * window.innerWidth) / 2) * xQuadrant);
         // var top = (0.3 * window.innerHeight) - (((0.3 * window.innerHeight) / 2) * yQuadrant);
-        
+
         console.log(`top: ${top} bottom : ${bottom}`);
         console.log(`left : ${left} right : ${right}`);
-        
-        return  {
+
+        return {
             top,
             right,
             bottom,
@@ -160,7 +195,7 @@
         };
     }
 
-    function _updatePreviewWindow({ top, bottom, left, right , src }) {
+    function _updatePreviewWindow({ top, bottom, left, right, src }) {
         let body = document.querySelector('body');
         let iframe_wrapper = document.querySelector('.tft_iframe_wrapper');
         let iframe = iframe_wrapper.querySelector('iframe');
@@ -179,6 +214,8 @@
 
     var threeFingerTap = {
         init,
+        setName,
+        getName,
         getHoverTimeout,
         setHoverTimeout,
         getCustomLoadingBackground,

@@ -7,7 +7,7 @@
     "lint": "jshint src/js/*",
     "prejs": "rm -rf dist/js && mkdir dist/js/",
     "js": "babel --presets babel-preset-es2015 --out-file dist/js/threeFingerTap.js src/js",
-    "minify:js": "uglifyjs dist/js/threeFingerTap.js -o dist/js/threeFingerTap.min.js",
+    "minify:js": "uglifyjs --compress --mangle -o dist/js/threeFingerTap.min.js -- dist/js/threeFingerTap.js",
     "scss": "node-sass src/scss/threeFingerTap.scss dist/css/threeFingerTap.css",
     "postcss": "postcss --use autoprefixer -o dist/css/threeFingerTap.css dist/css/threeFingerTap.css",
     "minify:css": "cleancss dist/css/threeFingerTap.css -o dist/css/threeFingerTap.min.css",
