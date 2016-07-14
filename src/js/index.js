@@ -8,6 +8,7 @@
     // API variables
     let _hoverTimeout = 2000;
     let _customLoadingBackground;
+    let _enable = true;
 
     // API Methods
     function init({ name, hoverTimeout, customLoadingBackground}) {
@@ -16,6 +17,14 @@
         setCustomLoadingBackground(customLoadingBackground);
         _constructDOM();
         _addEventListeners();
+    }
+
+    function enable() {
+        _enable = true;
+    }
+
+    function disable() {
+        _enable = false;
     }
 
     function setName(name) {
@@ -97,7 +106,7 @@
     function _addEventListeners() {
         window.addEventListener('mousemove', (event) => {
             if (event.target.classList.contains(_name)) {
-                if (!_currentNode) {
+                if (!_currentNode && _enable) {
                     _currentNode = event.target;
                     _timeout = setTimeout(() => {
                         if (_currentNode && _currentNode.classList.contains(_name)) {
@@ -214,12 +223,14 @@
 
     var threeFingerTap = {
         init,
+        enable,
+        disable,
         setName,
         getName,
         getHoverTimeout,
         setHoverTimeout,
         getCustomLoadingBackground,
-        setCustomLoadingBackground
+        setCustomLoadingBackground 
     };
     window.threeFingerTap = threeFingerTap;
 })(window);
