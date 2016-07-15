@@ -9,7 +9,7 @@ the same.
 
 ## Preview
 
-![alt text](http://i.imgur.com/gDTPCeC.gifv "Snippets Preview")
+![alt text](http://i.imgur.com/gDTPCeC.gif "Snippets Preview")
 
 ## Demo
 You can see a demo [here]().
