@@ -9,7 +9,7 @@ the same.
 
 ## Preview
 
-![alt text](https://s19.postimg.org/o6wbxfkoz/ezgif_com_video_to_gif_2.gif)
+![alt text](https://s19.postimg.org/o6wbxfkoz/ezgif_com_video_to_gif_2.gif "Snippets Preview")
 
 ## Demo
 You can see a demo [here]().
@@ -98,4 +98,8 @@ threeFingerTap.enable();
 | getCustomLoadingBackground | Returns the current value of the `customLoadingBackground` option | N/A | N/A | N/A |
 | setCustomLoadingBackground | Sets the loading effect to the passed GIF/image | String | yes | A valid value for the CSS `background-image` property |
 
+# Contact
+If you have any issues report them at [Issues](https://github.com/sidthesloth92/three-finger-tap-js/issues)
 
+# Source
+[Github](https://github.com/sidthesloth92/three-finger-tap-js)
