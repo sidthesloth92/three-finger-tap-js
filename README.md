@@ -9,7 +9,7 @@ the same.
 
 ## Preview
 
-![alt text](http://i.imgur.com/gDTPCeC.gif "Snippets Preview")
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/47sRYHDdado/0.jpg)](http://www.youtube.com/watch?v=47sRYHDdado)
 
 ## Demo
 You can see a demo [here]().
