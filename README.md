@@ -11,8 +11,8 @@ the same.
 
 ![alt text](https://s19.postimg.org/ivqm47ddv/ezgif_com_video_to_gif_1.gif "Snippets Preview")
 
-## Demo
-You can see a demo [here]().
+// ## Demo
+// You can see a demo [here]().
 
 ## Installation
 You can install the library as a dependency over NPM or you can simply download the release from [here]().

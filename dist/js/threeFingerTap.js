@@ -6,6 +6,7 @@
     var _currentNode = void 0;
     var _timeout = void 0;
     var _name = void 0;
+    var _initialized = void 0;
 
     // API variables
     var _hoverTimeout = 2000;
@@ -17,6 +18,12 @@
         var name = _ref.name;
         var hoverTimeout = _ref.hoverTimeout;
         var customLoadingBackground = _ref.customLoadingBackground;
+
+        if (!_initialized) {
+            _initialized = true;
+        } else {
+            throw new Error("Library already initialized");
+        }
 
         setName(name);
         setHoverTimeout(hoverTimeout);

@@ -4,6 +4,7 @@
     let _currentNode;
     let _timeout;
     let _name;
+    let _initialized;
 
     // API variables
     let _hoverTimeout = 2000;
@@ -12,6 +13,13 @@
 
     // API Methods
     function init({ name, hoverTimeout, customLoadingBackground}) {
+        if(!_initialized) {
+            _initialized = true;
+        }
+        else {
+             throw new Error("Library already initialized");
+        }
+
         setName(name);
         setHoverTimeout(hoverTimeout);
         setCustomLoadingBackground(customLoadingBackground);
