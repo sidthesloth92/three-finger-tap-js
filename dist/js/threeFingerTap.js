@@ -163,8 +163,9 @@
 
         // var xQuadrant = (x < (window.innerWidth / 3)) ? 0 : (x < (window.innerWidth / 3 * 2)) ? 1 : 2;
         // var yQuadrant = (y < (window.innerHeight / 3)) ? 0 : (y < (window.innerHeight / 3 * 2)) ? 1 : 2;
-
-        var xQuadrant = x < window.innerWidth / 3 ? 0 : x < window.innerWidth / 3 * 2 ? 1 : 2;
+        var xPointOne = window.innerWidth / 2 - 0.1 * window.innerWidth;
+        var xPointTwo = window.innerWidth / 2 + 0.1 * window.innerWidth;
+        var xQuadrant = x < xPointOne ? 0 : x < xPointTwo ? 1 : 2;
         var yQuadrant = y < window.innerHeight / 2 ? 0 : 1;
         console.log("xQuadrant: " + xQuadrant + ", yQuadrant : " + yQuadrant);
 
