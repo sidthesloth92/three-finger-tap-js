@@ -21,7 +21,7 @@ the same.
 
 
 ## Installation
-You can install the library as a dependency over NPM or you can simply download the release from [here]().
+You can install the library as a dependency over NPM or you can simply download the release from [here](https://github.com/sidthesloth92/three-finger-tap-js/releases/tag/v1.0.1).
 
     npm i three-finger-tap-js
 
