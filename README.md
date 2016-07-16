@@ -1,7 +1,9 @@
 # three-finger-tap-js
 
-[![build](https://img.shields.io/travis/sidthesloth92/three-finger-tap-js.svg)](https://travis-ci.org/sidthesloth92/three-finger-tap-js/builds)
 [![release](https://img.shields.io/github/release/sidthesloth92/three-finger-tap-js.svg)](https://github.com/sidthesloth92/three-finger-tap-js/releases/tag/v1.0.1)
+[![build](https://img.shields.io/travis/sidthesloth92/three-finger-tap-js.svg)](https://travis-ci.org/sidthesloth92/three-finger-tap-js/builds)
+[![dependencies](https://david-dm.org/sidthesloth92/three-finger-tap-js.svg)](https://david-dm.org/sidthesloth92/three-finger-tap-js)
+[![NPM Downloads](https://img.shields.io/npm/dt/https://github.com/sidthesloth92/three-finger-tap-js.svg)](https://www.npmjs.com/package/https://github.com/sidthesloth92/three-finger-tap-js)
 
 
 
