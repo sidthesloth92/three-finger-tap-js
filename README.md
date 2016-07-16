@@ -1,4 +1,10 @@
 # three-finger-tap-js
+
+[![build](https://img.shields.io/travis/sidthesloth92/three-finger-tap-js.svg)](https://travis-ci.org/sidthesloth92/three-finger-tap-js/builds)
+[![release](https://img.shields.io/github/release/sidthesloth92/three-finger-tap-js.svg)](https://github.com/sidthesloth92/three-finger-tap-js/releases/tag/v1.0.1)
+
+
+
 A small (actually really small, around 1KB) library, that attempts to mimic the three finger tap behaviour exhibited when you 
 tap on a URL with three fingers in Safari.
 
