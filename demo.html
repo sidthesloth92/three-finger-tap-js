@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Three Finger Tap JS - Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/threeFingertap.min.css">
+</head>
+
+<body>
+    <div class="demo_page_wrapper">
+        <section class="body_wrapper">
+            <section class="section--general section--demo">
+                <h1 class="section--general--heading">Demo</h1>
+                <p class="section--general--text">Hover over the hyperlink in different regions to see how the preview window opens up for each region.</p>
+                <span class="enable--disable--button"></span>
+            </section>
+            <section class="section--demo--area">
+                <div class="tile"><a href="http://wikipedia.org" class="three-finger-tap">Link 1</a></div>
+                <div class="tile"><a href="https://dbwriteups.wordpress.com" class="three-finger-tap">Link 2</a></div>
+                <div class="tile"><a href="http://codepen.io/sidthesloth92/pens/public/" class="three-finger-tap">Link 3</a></div>
+                <div class="tile"><a href="https://dbwriteups.wordpress.com" class="three-finger-tap">Link 4</a></div>
+                <div class="tile"><a href="http://wikipedia.org" class="three-finger-tap">Link 5</a></div>
+                <div class="tile"><a href="http://codepen.io/sidthesloth92/pens/public/" class="three-finger-tap">Link 6</a></div>
+            </section>
+        </section>
+    </div>
+    <script type="text/javascript" src="js/threeFingerTap.min.js"></script>
+    <script type="text/javascript">
+        threeFingerTap.init({
+            name : 'three-finger-tap',
+            hoverTimeout: 1000
+        });
+
+        var toggled = true;
+        var toggleButton = document.querySelector('.enable--disable--button');
+        toggleButton.classList.add('enable');
+
+        toggleButton.addEventListener('click', function(event) {
+            if(!toggled) {
+                toggled = true;
+                toggleButton.classList.add('enable');
+                threeFingerTap.enable();
+            }
+            else {
+                toggled = false;
+                toggleButton.classList.remove('enable');
+                threeFingerTap.disable();
+            }
+        })
+    </script>
+</body>
+
+</html>

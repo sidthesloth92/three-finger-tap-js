@@ -1,0 +1,221 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+@font-face {
+  font-family: "Comfortaa";
+  src: url("../assets/fonts/Comfortaa-Bold.ttf");
+  font-weight: bold;
+  font-style: normal; }
+
+@font-face {
+  font-family: "Comfortaa";
+  src: url("../assets/fonts/Comfortaa-Regular.ttf");
+  font-weight: normal;
+  font-style: normal; }
+
+h1, h2, h3, h4, h5, h6, pre {
+  font-family: "Comfortaa", sans-serif;
+  color: #4A4A4A; }
+
+p {
+  font-family: Helvetica, sans-serif;
+  color: #4A4A4A; }
+
+.section--general .section--general--heading {
+  font-size: 36px;
+  font-weight: bold;
+  border-bottom: 1px solid #E0E0E0;
+  padding-bottom: 15px;
+  margin-bottom: 20px; }
+
+.section--general .section--general--text {
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+  margin-bottom: 20px;
+  font-weight: lighter; }
+  .section--general .section--general--text .text--link {
+    color: #fa536d;
+    text-decoration: none; }
+
+.section--general .section--general--snippet {
+  background: #F8F8F8;
+  font-size: 14px;
+  line-height: 18px;
+  padding: 13px 0px 13px 45px;
+  margin-bottom: 15px;
+  overflow: scroll; }
+
+.header {
+  height: 450px;
+  background-image: -webkit-linear-gradient(left, #ffafbd, #fffabf);
+  background-image: linear-gradient(to right, #ffafbd, #fffabf);
+  font-family: "Comfortaa", sans-serif;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 100px;
+  text-align: center; }
+  .header .header--title {
+    font-size: 50px;
+    margin-bottom: 30px; }
+  .header .header--description {
+    font-size: 20px;
+    margin-bottom: 50px;
+    text-align: center; }
+  .header .button--container {
+    text-align: center; }
+    .header .button--container .button {
+      display: inline-block;
+      box-sizing: border-box;
+      width: 235px;
+      height: 60px;
+      border: 1px solid white;
+      border-radius: 10px;
+      text-align: center;
+      padding-top: 15px;
+      font-size: 20px;
+      margin: 0px 15px; }
+      .header .button--container .button:first-child {
+        margin-bottom: 15px; }
+      .header .button--container .button .button--icon {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        margin-right: 10px; }
+      .header .button--container .button .button--text {
+        font-size: 20px;
+        display: inline-block;
+        vertical-align: text-top; }
+        .header .button--container .button .button--text a {
+          color: white;
+          text-decoration: none; }
+
+.body_wrapper {
+  margin: 0 auto;
+  width: 80%;
+  margin-bottom: 80px; }
+  .body_wrapper .section--main {
+    margin-bottom: 80px; }
+    .body_wrapper .section--main .section--main--title {
+      font-size: 40px;
+      color: #fa536d;
+      font-weight: bold;
+      text-align: center; }
+    .body_wrapper .section--main .section--main--description {
+      margin-top: 50px;
+      text-align: center; }
+      .body_wrapper .section--main .section--main--description p {
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: 0.2px;
+        margin-bottom: 15px;
+        font-weight: lighter; }
+  .body_wrapper .section--installation {
+    margin-bottom: 30px; }
+
+/*---------------------------------------------- demo.html ----------------------------------------------*/
+.demo_page_wrapper {
+  padding-top: 50px; }
+  .demo_page_wrapper .body_wrapper {
+    width: 80%;
+    margin: 0 auto; }
+    .demo_page_wrapper .body_wrapper .section--demo .section--general--text {
+      display: inline-block;
+      width: 80%; }
+    .demo_page_wrapper .body_wrapper .section--demo .enable--disable--button {
+      display: inline-block;
+      position: relative;
+      left: 50px;
+      width: 60px;
+      height: 30px;
+      border: 1px solid #E0E0E0;
+      border-radius: 30px; }
+      .demo_page_wrapper .body_wrapper .section--demo .enable--disable--button:after {
+        content: '';
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        left: 2px;
+        top: 2px;
+        border: 1px solid #E0E0E0;
+        border-radius: 100%;
+        -webkit-transition: all .2s;
+        transition: all .2s; }
+      .demo_page_wrapper .body_wrapper .section--demo .enable--disable--button.enable {
+        border: 1px solid #FFB0BD; }
+        .demo_page_wrapper .body_wrapper .section--demo .enable--disable--button.enable:after {
+          border: 1px solid #fa536d;
+          background: #fa536d;
+          -webkit-transform: translateX(30px);
+                  transform: translateX(30px); }
+    .demo_page_wrapper .body_wrapper .section--demo--area {
+      height: 300px;
+      border-radius: 10px;
+      margin: 0 auto; }
+      .demo_page_wrapper .body_wrapper .section--demo--area .tile {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 33%;
+        height: 200px;
+        border: 1px dashed #E0E0E0;
+        margin: 0px -2px;
+        text-align: center;
+        padding-top: 95px;
+        font-family: "Comfortaa", sans-serif; }
+        .demo_page_wrapper .body_wrapper .section--demo--area .tile a {
+          text-decoration: none;
+          color: #4A4A4A;
+          cursor: pointer; }
+          .demo_page_wrapper .body_wrapper .section--demo--area .tile a:hover {
+            color: #fa536d; }

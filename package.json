@@ -1,0 +1,33 @@
+{
+  "name": "three-finger-tap-js-gh-pages",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "node-sass scss/main.scss css/main.css",
+    "postcss": "postcss --use autoprefixer -o css/main.css css/main.css",
+    "build:css": "npm run scss && npm run postcss",
+    "watch:css": "onchange 'scss/**/*.scss' -- npm run build:css",
+    "start": "parallelshell 'npm run watch:css' 'live-server'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sidthesloth92/three-finger-tap-js.git"
+  },
+  "author": "Dinesh Balaji <www.sidthesloth@gmail.com> (https://dbwriteups.wordpress.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sidthesloth92/three-finger-tap-js/issues"
+  },
+  "homepage": "https://github.com/sidthesloth92/three-finger-tap-js#readme",
+  "devDependencies": {
+    "autoprefixer": "6.3.7",
+    "live-server": "1.0.0",
+    "node-sass": "3.8.0",
+    "onchange": "2.5.0",
+    "parallelshell": "2.0.0",
+    "postcss": "5.1.0",
+    "postcss-cli": "2.5.2"
+  }
+}

@@ -1,0 +1,235 @@
+@import 'reset';
+
+$font-family: 'Comfortaa';
+$font-color: #4A4A4A;
+$theme-font-color-pink: #fa536d;
+$theme-font-color-pink-light: #FFB0BD;
+$border-color: #E0E0E0;
+
+$snippet-background: #F8F8F8;
+
+@font-face {
+    font-family: $font-family;
+    src: url('../assets/fonts/Comfortaa-Bold.ttf');
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: $font-family;
+    src: url('../assets/fonts/Comfortaa-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+//General Rules
+
+h1, h2, h3, h4, h5, h6, pre {
+    font-family: $font-family, sans-serif;
+    color: $font-color;
+}
+p {
+    font-family: Helvetica, sans-serif;
+    color: $font-color;
+}
+
+.section--general {
+    .section--general--heading {
+        font-size: 36px;
+        font-weight: bold;
+        border-bottom: 1px solid $border-color;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+    .section--general--text {
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: 0.2px;
+        margin-bottom: 20px;
+        font-weight: lighter;
+        .text--link {
+            color: $theme-font-color-pink;
+            text-decoration: none;
+        }
+    }
+
+    .section--general--snippet {
+        background: $snippet-background;
+        font-size: 14px;
+        line-height: 18px;
+        padding: 13px 0px 13px 45px;
+        margin-bottom: 15px;
+        overflow: scroll;
+    }
+}
+
+.header {
+    height: 450px;
+    background-image: linear-gradient(to right, #ffafbd, #fffabf);
+    font-family: $font-family, sans-serif;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 100px;
+    text-align: center;
+
+    .header--title {
+        font-size: 50px;
+        margin-bottom: 30px;
+    }
+
+    .header--description {
+        font-size: 20px;
+        margin-bottom: 50px;
+        text-align: center;
+    }
+
+    .button--container {
+        text-align: center;
+        .button {
+            display: inline-block;
+            box-sizing: border-box;
+            width: 235px;
+            height: 60px;
+            border: 1px solid white;
+            border-radius: 10px;
+            text-align: center;
+            padding-top: 15px;
+            font-size: 20px;
+            margin: 0px 15px;
+
+            &:first-child {
+                margin-bottom : 15px;
+            }
+
+            .button--icon {
+                display: inline-block;
+                width: 25px;
+                height: 25px;
+                margin-right: 10px;
+            }
+
+            .button--text {
+                font-size: 20px;
+                display: inline-block;
+                vertical-align: text-top;
+
+                a {
+                    color: white;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+
+.body_wrapper {
+    margin: 0 auto;
+    width: 80%;
+    margin-bottom: 80px;
+    .section--main {
+        margin-bottom: 80px;
+        .section--main--title {
+            font-size: 40px;
+            color: $theme-font-color-pink;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .section--main--description {
+            margin-top: 50px;
+            text-align: center;
+            p {
+                font-size: 18px;
+                line-height: 24px;
+                letter-spacing: 0.2px;
+                margin-bottom: 15px;
+                font-weight: lighter;
+            } 
+        }
+    }
+
+    .section--installation {
+        margin-bottom: 30px;
+    }
+}
+
+
+/*---------------------------------------------- demo.html ----------------------------------------------*/
+
+.demo_page_wrapper {
+    padding-top: 50px;
+    .body_wrapper {
+        width: 80%;
+        margin: 0 auto;
+
+        .section--demo {
+            .section--general--text {
+                display: inline-block;
+                width: 80%;
+                
+            }
+            .enable--disable--button {
+                display: inline-block;
+                position: relative;
+                left: 50px;
+                width: 60px;
+                height: 30px;
+                border: 1px solid $border-color;
+                border-radius: 30px;
+                &:after {
+                    content: '';
+                    position: absolute;
+                    width: 24px;
+                    height: 24px;
+                    left: 2px;
+                    top: 2px;
+                    border: 1px solid $border-color;
+                    border-radius: 100%;
+                    transition: all .2s;
+                }
+
+                &.enable {
+                    border: 1px solid $theme-font-color-pink-light;
+
+                    &:after {
+                        border: 1px solid $theme-font-color-pink;
+                        background: $theme-font-color-pink;
+                        transform: translateX(30px);
+                    }
+                }
+            }
+        }
+
+        .section--demo--area {
+            height: 300px;
+            border-radius: 10px;
+            margin: 0 auto;
+            
+            .tile {
+                display: inline-block;
+                box-sizing: border-box;
+                width: 33%;
+                height: 200px;
+                border: 1px dashed $border-color;
+                margin: 0px -2px;
+                text-align: center;
+                padding-top: 95px;
+                font-family: $font-family, sans-serif;
+
+                a {
+                    text-decoration: none;
+                    color: $font-color;
+                    cursor: pointer;
+                    &:hover {
+                        color: $theme-font-color-pink;
+                    }
+                }
+            }
+        }
+    }
+}
