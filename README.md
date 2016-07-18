@@ -19,9 +19,12 @@ the same.
 
 ![alt text](https://s19.postimg.org/ivqm47ddv/ezgif_com_video_to_gif_1.gif "Snippets Preview")
 
+## Demo
+
+You have a look at the demo [here](https://sidthesloth92.github.io/three-finger-tap-js/demo.html).
 
 ## Installation
-You can install the library as a dependency over NPM or you can simply download the release from [here](https://github.com/sidthesloth92/three-finger-tap-js/releases/tag/v1.0.1).
+You can install the library as a dependency over NPM or you can simply download the release from the dist folder [here](https://github.com/sidthesloth92/three-finger-tap-js/tree/master/dist).
 
     npm i three-finger-tap-js
 
