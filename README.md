@@ -30,11 +30,11 @@ You can install the library as a dependency over NPM or you can simply download 
 
 ## Usage
 
-1.Add reference to `threeFingerTap.min.js` and `threeFingerTap.min.css` to the HTML page you wish to add the effect to.
+1. Assign an appropriate class name to all the `<a>` (anchor) tags for which you wish to add the hover effect to.
 ```html
 <a href="https://wikipedia.org" class="three-finger-tap">Link</a>
 ```
-2.Add references to the CSS and JS files
+2. Add references to `threeFingerTap.min.js` and `threeFingerTap.min.css` to the HTML page.
 ```html
 
 <link rel="stylesheet" href="../dist/css/threeFingerTap.min.css">
@@ -42,7 +42,7 @@ You can install the library as a dependency over NPM or you can simply download 
 <script type="text/javascript" src="../dist/js/threeFingerTap.min.js"></script>
     
 ```
-3.Call the library using the init method and see the magic happen
+3. Call the library using the init method and see the magic happen.
 ```javascript
 threeFingerTap.init({ 
     name : 'three-finger-tap', 
