@@ -30,11 +30,19 @@ You can install the library as a dependency over NPM or you can simply download 
 
 ## Usage
 
-1. Add reference to `threeFingerTap.min.js` and `threeFingerTap.min.css` to the HTML page you wish to add the effect to.
+1.Add reference to `threeFingerTap.min.js` and `threeFingerTap.min.css` to the HTML page you wish to add the effect to.
 ```html
 <a href="https://wikipedia.org" class="three-finger-tap">Link</a>
 ```
-2. Call the library using the init method and see the magic happen
+2.Add references to the CSS and JS files
+```html
+
+<link rel="stylesheet" href="../dist/css/threeFingerTap.min.css">
+
+<script type="text/javascript" src="../dist/js/threeFingerTap.min.js"></script>
+    
+```
+3.Call the library using the init method and see the magic happen
 ```javascript
 threeFingerTap.init({ 
     name : 'three-finger-tap', 
