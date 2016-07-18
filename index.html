@@ -48,9 +48,13 @@
         </section>
         <section class="section--general section--usage">
             <h1 class="section--general--heading">Usage</h1>
-            <p class="section--general--text">1.  Add reference to threeFingerTap.min.js and threeFingerTap.min.css to the HTML page you wish to add the effect to.</p>
+            <p class="section--general--text">1.  Assign an appropriate class name to all the &lt;a&gt; (anchor) tags for which you wish to add the hover effect to.</p>
             <pre class="section--general--snippet">&lt;a href="https://wikipedia.org" class="three-finger-tap"&gt;Link&lt;/a&gt;</pre>
-            <p class="section--general--text">2. Call the library using the init method and see the magic happen.</p>
+            <p class="section--general--text">2.  Add references to threeFingerTap.min.js and threeFingerTap.min.css to the HTML page.</p>
+            <pre class="section--general--snippet">&lt;link rel="stylesheet" href="../dist/css/threeFingerTap.min.css"&gt;
+
+&lt;script type="text/javascript" src="../dist/js/threeFingerTap.min.js"&gt;&lt;/script&gt;</pre>
+            <p class="section--general--text">3. Call the library using the init method and see the magic happen.</p>
             <pre class="section--general--snippet">
 threeFingerTap.init({ 
     name : 'three-finger-tap', 
