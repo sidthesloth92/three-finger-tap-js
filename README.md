@@ -12,12 +12,19 @@ tap on a URL with three fingers in Safari.
 
 In Safari, when the user taps on a hyperlink using three fingers, a small preview window opens that shows the webpage the
 link would have taken the use to. This library attempts to mimic that behaviour. But instead of using the three finger tap gesture to
-open the URL preview window (as it is not available on all hardware), the library makes use of timed hover gesture to achieve
+open the URL preview window (as it is not available on all hardware), in desktop, the library makes use of timed hover gesture to achieve
 the same.
+
+In mobile, the user has to triple tap on a URL to open the preview window.
 
 ## Preview
 
+### Desktop
+
 ![alt text](https://s19.postimg.org/ivqm47ddv/ezgif_com_video_to_gif_1.gif "Snippets Preview")
+
+### Mobile
+![alt text](https://s19.postimg.org/xucadsfib/ezgif_3450773392.gif "Snippets Preview")
 
 ## Demo
 
@@ -46,7 +53,7 @@ You can install the library as a dependency over NPM or you can simply download 
 ```javascript
 threeFingerTap.init({ 
     name : 'three-finger-tap', 
-    hoverTimeout : 1000
+    hoverTimeout : 1000 // required only for desktop
 })
 ```
 ## API
@@ -65,7 +72,7 @@ An object with name, hoverTimeout and customLoadingBackground as keys.
 | Name | Description | Type | Required | Default |
 | :--- | :---------- | :--: | :------: | :-----: |
 | name | name of the CSS class name that will be used to identify the links to apply the hover effect on | String | yes | N/A |
-| hoverTimeout | the duration for which a user needs to hover over an URL before the preview window appears. The value should be in milliseconds | Number | no | 2000 |
+| hoverTimeout | the duration for which a user needs to hover over an URL before the preview window appears. The value should be in milliseconds (Desktop only) | Number | no | 2000 for Desktop/ 500 for Mobile |
 | customLoadingBackground | By default a loading background is added, you can use this parameter to set a custom image or gif as background. The value should be a valid value for the CSS `background-image` property. The path to the image/gif should be relative to page the effect will be displayed | String | no | N/A |
 
 **Usage**
@@ -73,7 +80,7 @@ An object with name, hoverTimeout and customLoadingBackground as keys.
 ```javascript
 threeFingerTap.init({ 
     name : 'class-name', 
-    hoverTimeout : 1000,
+    hoverTimeout : 1000, // required only for Desktop
     customLoadingBackground : "url('../assets/gifs/spinner.gif')"
 })
 ```
@@ -111,7 +118,7 @@ threeFingerTap.enable();
 | getName | Returns the current value of the `name` option | N/A | N/A | N/A |
 | setName | Updates the `name` value to the value passed as parameter | String | yes | A CSS valid class name |
 | getHoverTimeout | Returns the current value of the `hoverTimeout` option | N/A | N/A | N/A |
-| setHovertimeout | Updates the `hoverTimeout` to the value passed as parameter | Number | yes | milliseconds |
+| setHoverTimeout | Updates the `hoverTimeout` to the value passed as parameter for desktop. In case of mobile, ignore the parameter passed. | Number | yes | milliseconds |
 | getCustomLoadingBackground | Returns the current value of the `customLoadingBackground` option | N/A | N/A | N/A |
 | setCustomLoadingBackground | Sets the loading effect to the passed GIF/image | String | yes | A valid value for the CSS `background-image` property |
 
