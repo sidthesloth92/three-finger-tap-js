@@ -126,6 +126,13 @@
     }
     let _count = 0;
     function _addEventListeners() {
+         function _reset() {
+            _openLink = false;
+            _count = 0;
+            _currentNode = undefined;
+            clearTimeout(_timeout);
+        }
+
         if(!_isMobile) {
             console.log('adding desktop listener');
             window.addEventListener('mousemove', (event) => {
@@ -188,12 +195,7 @@
                 }
             });
 
-            function _reset() {
-                _openLink = false;
-                _count = 0;
-                _currentNode = undefined;
-                clearTimeout(_timeout);
-            }
+           
         }
         
         let body = document.querySelector('body');
