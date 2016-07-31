@@ -5,6 +5,7 @@
     let _timeout;
     let _name;
     let _initialized;
+    let _isMobile;
 
     // API variables
     let _hoverTimeout = 2000;
@@ -19,7 +20,7 @@
         else {
              throw new Error("Library already initialized");
         }
-
+        _isMobile = _isTouchDevice();
         setName(name);
         setHoverTimeout(hoverTimeout);
         setCustomLoadingBackground(customLoadingBackground);
@@ -47,10 +48,16 @@
     }
 
     function setHoverTimeout(hoverTimeout) {
-        if (isNaN(hoverTimeout)) {
-            throw new Error("hoverTimeout should have a numerical value");
+        if(!_isMobile) {
+            if (isNaN(hoverTimeout)) {
+                throw new Error("hoverTimeout should have a numerical value");
+            }
+            _hoverTimeout = hoverTimeout;
         }
-        _hoverTimeout = hoverTimeout;
+        else {
+            _hoverTimeout = 500;
+            console.log("Touch device. hoverTimeout value ignored.");
+        }
     }
 
     function getHoverTimeout() {
@@ -72,7 +79,14 @@
         return _customLoadingBackground;
     }
 
+    function getIsMobileDevice() {
+        return _isMobile;
+    }
     // Private Methods
+    function _isTouchDevice() {
+        return window.hasOwnProperty('ontouchstart');
+    }
+
     function _constructDOM() {
 
         var fragment = document.createDocumentFragment();
@@ -110,25 +124,78 @@
             }
         }
     }
-
+    let _count = 0;
     function _addEventListeners() {
-        window.addEventListener('mousemove', (event) => {
-            if (event.target.classList.contains(_name)) {
-                if (!_currentNode && _enable) {
-                    _currentNode = event.target;
-                    _timeout = setTimeout(() => {
-                        if (_currentNode && _currentNode.classList.contains(_name)) {
-                            _showPreviewWindow();
-                        }
-                    }, _hoverTimeout);
+        if(!_isMobile) {
+            console.log('adding desktop listener');
+            window.addEventListener('mousemove', (event) => {
+                if (event.target.classList.contains(_name)) {
+                    if (!_currentNode && _enable) {
+                        _currentNode = event.target;
+                        _timeout = setTimeout(() => {
+                            if (_currentNode && _currentNode.classList.contains(_name)) {
+                                _showPreviewWindow();
+                            }
+                        }, _hoverTimeout);
+                    }
                 }
-            }
-            else {
+                else {
+                    _currentNode = undefined;
+                    clearTimeout(_timeout);
+                }
+            });
+        }
+        else {
+            console.log('addding listener');
+            
+            let _openLink = false;
+            window.addEventListener('click', (event) => {
+                console.log('click');
+                if (event.target.classList.contains(_name)) {
+                    if(event.target !== _currentNode) {
+                        _count = 0;
+                        _currentNode = event.target;
+                        clearTimeout(_timeout);
+                    }
+                    if(!_openLink) {
+                         _count++;
+
+                        if(_count == 1) {
+                            _timeout = setTimeout(() => {
+                                if(_currentNode) {
+                                    console.log(_count);
+                                    if(_count >= 3 && _enable) {
+                                        _showPreviewWindow();
+                                        _reset();
+                                    }
+                                    else {
+                                        console.log('not enough clicks opening link');
+                                        _openLink = true;
+                                        _currentNode.click();
+                                    }
+                                }
+                            }, _hoverTimeout);
+                        }
+                        event.preventDefault();
+                    }
+                    else {
+                        console.log('called by open link');
+                        _reset.call(this);
+                    }
+                }
+                else {
+                    _reset.call(this);
+                }
+            });
+
+            function _reset() {
+                _openLink = false;
+                _count = 0;
                 _currentNode = undefined;
                 clearTimeout(_timeout);
             }
-        });
-
+        }
+        
         let body = document.querySelector('body');
         body.addEventListener('click', _hidePreviewWindow);
     }
@@ -239,7 +306,8 @@
         getHoverTimeout,
         setHoverTimeout,
         getCustomLoadingBackground,
-        setCustomLoadingBackground 
+        setCustomLoadingBackground,
+        getIsMobileDevice
     };
     window.threeFingerTap = threeFingerTap;
 })(window);
