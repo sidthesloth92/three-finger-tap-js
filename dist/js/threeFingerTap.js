@@ -139,7 +139,6 @@
         }
 
         if (!_isMobile) {
-            console.log('adding desktop listener');
             window.addEventListener('mousemove', function (event) {
                 if (event.target.classList.contains(_name)) {
                     if (!_currentNode && _enable) {
@@ -157,11 +156,8 @@
             });
         } else {
             (function () {
-                console.log('addding listener');
-
                 var _openLink = false;
                 window.addEventListener('click', function (event) {
-                    console.log('click');
                     if (event.target.classList.contains(_name)) {
                         if (event.target !== _currentNode) {
                             _count = 0;
@@ -174,12 +170,10 @@
                             if (_count == 1) {
                                 _timeout = setTimeout(function () {
                                     if (_currentNode) {
-                                        console.log(_count);
                                         if (_count >= 3 && _enable) {
                                             _showPreviewWindow();
                                             _reset();
                                         } else {
-                                            console.log('not enough clicks opening link');
                                             _openLink = true;
                                             _currentNode.click();
                                         }
@@ -188,7 +182,6 @@
                             }
                             event.preventDefault();
                         } else {
-                            console.log('called by open link');
                             _reset.call(_this);
                         }
                     } else {
