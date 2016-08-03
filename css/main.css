@@ -173,32 +173,36 @@ p {
     .demo_page_wrapper .body_wrapper .section--demo .section--general--text {
       display: inline-block;
       width: 80%; }
-    .demo_page_wrapper .body_wrapper .section--demo .enable--disable--button {
+    .demo_page_wrapper .body_wrapper .section--demo .section--general--checkbox {
       display: inline-block;
-      position: relative;
-      left: 50px;
-      width: 60px;
-      height: 30px;
-      border: 1px solid #E0E0E0;
-      border-radius: 30px; }
-      .demo_page_wrapper .body_wrapper .section--demo .enable--disable--button:after {
-        content: '';
-        position: absolute;
-        width: 24px;
-        height: 24px;
-        left: 2px;
-        top: 2px;
+      width: 18%;
+      vertical-align: top; }
+      .demo_page_wrapper .body_wrapper .section--demo .section--general--checkbox .enable--disable--button {
+        display: inline-block;
+        position: relative;
+        float: right;
+        width: 50px;
+        height: 26px;
         border: 1px solid #E0E0E0;
-        border-radius: 100%;
-        -webkit-transition: all .2s;
-        transition: all .2s; }
-      .demo_page_wrapper .body_wrapper .section--demo .enable--disable--button.enable {
-        border: 1px solid #FFB0BD; }
-        .demo_page_wrapper .body_wrapper .section--demo .enable--disable--button.enable:after {
-          border: 1px solid #fa536d;
-          background: #fa536d;
-          -webkit-transform: translateX(30px);
-                  transform: translateX(30px); }
+        border-radius: 30px; }
+        .demo_page_wrapper .body_wrapper .section--demo .section--general--checkbox .enable--disable--button:after {
+          content: '';
+          position: absolute;
+          width: 18px;
+          height: 18px;
+          left: 2px;
+          top: 3px;
+          border: 1px solid #E0E0E0;
+          border-radius: 100%;
+          -webkit-transition: all .2s;
+          transition: all .2s; }
+        .demo_page_wrapper .body_wrapper .section--demo .section--general--checkbox .enable--disable--button.enable {
+          border: 1px solid #FFB0BD; }
+          .demo_page_wrapper .body_wrapper .section--demo .section--general--checkbox .enable--disable--button.enable:after {
+            border: 1px solid #fa536d;
+            background: #fa536d;
+            -webkit-transform: translateX(25px);
+                    transform: translateX(25px); }
     .demo_page_wrapper .body_wrapper .section--demo--area {
       height: 300px;
       border-radius: 10px;

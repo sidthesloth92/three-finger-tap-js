@@ -173,33 +173,39 @@ p {
                 width: 80%;
                 
             }
-            .enable--disable--button {
+            .section--general--checkbox {
                 display: inline-block;
-                position: relative;
-                left: 50px;
-                width: 60px;
-                height: 30px;
-                border: 1px solid $border-color;
-                border-radius: 30px;
-                &:after {
-                    content: '';
-                    position: absolute;
-                    width: 24px;
-                    height: 24px;
-                    left: 2px;
-                    top: 2px;
+                width: 18%;
+                vertical-align: top;
+                
+                .enable--disable--button {
+                    display: inline-block;
+                    position: relative;
+                    float: right;
+                    width: 50px;
+                    height: 26px;
                     border: 1px solid $border-color;
-                    border-radius: 100%;
-                    transition: all .2s;
-                }
-
-                &.enable {
-                    border: 1px solid $theme-font-color-pink-light;
-
+                    border-radius: 30px;
                     &:after {
-                        border: 1px solid $theme-font-color-pink;
-                        background: $theme-font-color-pink;
-                        transform: translateX(30px);
+                        content: '';
+                        position: absolute;
+                        width: 18px;
+                        height: 18px;
+                        left: 2px;
+                        top: 3px;
+                        border: 1px solid $border-color;
+                        border-radius: 100%;
+                        transition: all .2s;
+                    }
+
+                    &.enable {
+                        border: 1px solid $theme-font-color-pink-light;
+
+                        &:after {
+                            border: 1px solid $theme-font-color-pink;
+                            background: $theme-font-color-pink;
+                            transform: translateX(25px);
+                        }
                     }
                 }
             }
