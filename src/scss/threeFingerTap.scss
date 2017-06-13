@@ -10,7 +10,8 @@
     background-size: 50px;
     background-position: center;
     transform: scale(0, 0);
-    overflow: scroll;
+    overflow: auto;
+
     &.show {
         display: block;
         visibility: visible;
@@ -50,6 +51,13 @@
 
 .noscroll {
     overflow: hidden;
+
+    //Fixed content not scrolling scrolls the background
+    // https://stackoverflow.com/questions/29001977/safari-in-ios8-is-scrolling-screen-when-fixed-elements-get-focus
+    -webkit-overflow-scrolling: touch !important;
+    //Click not working in iOS safari
+    // https://stackoverflow.com/questions/14795944/jquery-click-events-not-working-in-ios
+    cursor: pointer;
 }
 
 @keyframes spin {
