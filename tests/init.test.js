@@ -1,4 +1,4 @@
-const threeFingerTap = require('../src/js/index.js');
+const threeFingerTap = require('../dist/js/threeFingerTap.js');
 
 
 describe("test initialization", () => {
