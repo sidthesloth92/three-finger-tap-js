@@ -4,7 +4,6 @@
   height: 45vh;
   box-shadow: 0px 0px 5px 0px #4b4b4b;
   visibility: hidden;
-  -webkit-transition: -webkit-transform .1s linear;
   transition: -webkit-transform .1s linear;
   transition: transform .1s linear;
   transition: transform .1s linear, -webkit-transform .1s linear;
@@ -14,7 +13,7 @@
   background-position: center;
   -webkit-transform: scale(0, 0);
           transform: scale(0, 0);
-  overflow: scroll; }
+  overflow: auto; }
   .tft_iframe_wrapper.show {
     display: block;
     visibility: visible;
@@ -40,7 +39,9 @@
             animation: spin 2s linear infinite; }
 
 .noscroll {
-  overflow: hidden; }
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch !important;
+  cursor: pointer; }
 
 @-webkit-keyframes spin {
   from {

@@ -1,24 +1,24 @@
 "use strict";
 
-(function (window) {
+(function () {
 
     // Private variables
-    var _currentNode = void 0;
-    var _timeout = void 0;
-    var _name = void 0;
-    var _initialized = void 0;
-    var _isMobile = void 0;
+    var _currentNode = void 0; // specifies the current DOM element hovered or tapped
+    var _timeout = void 0; // specifies the hover timeout or tap timeout
+    var _name = void 0; // specifies the CSS class name
+    var _initialized = void 0; // specifies whether the library is initialized or not
+    var _isMobile = void 0; // indicates a mobile device or nont
 
     // API variables
-    var _hoverTimeout = 2000;
-    var _customLoadingBackground = void 0;
-    var _enable = true;
+    var _hoverTimeout = 2000; // user specified value for the hover timeout, set to 500 if mobile
+    var _customLoadingBackground = void 0; // user specified backgroundImage CSS value
+    var _enable = true; // user specified value indicating whether the library is currently active
 
     // API Methods
     function init(_ref) {
-        var name = _ref.name;
-        var hoverTimeout = _ref.hoverTimeout;
-        var customLoadingBackground = _ref.customLoadingBackground;
+        var name = _ref.name,
+            hoverTimeout = _ref.hoverTimeout,
+            customLoadingBackground = _ref.customLoadingBackground;
 
         if (!_initialized) {
             _initialized = true;
@@ -128,6 +128,7 @@
         }
     }
     var _count = 0;
+    var _openLink = false;
     function _addEventListeners() {
         var _this = this;
 
@@ -155,40 +156,38 @@
                 }
             });
         } else {
-            (function () {
-                var _openLink = false;
-                window.addEventListener('click', function (event) {
-                    if (event.target.classList.contains(_name)) {
-                        if (event.target !== _currentNode) {
-                            _count = 0;
-                            _currentNode = event.target;
-                            clearTimeout(_timeout);
-                        }
-                        if (!_openLink) {
-                            _count++;
+            _openLink = false;
+            window.addEventListener('click', function (event) {
+                if (event.target.classList.contains(_name)) {
+                    if (event.target !== _currentNode) {
+                        _count = 0;
+                        _currentNode = event.target;
+                        clearTimeout(_timeout);
+                    }
+                    if (!_openLink) {
+                        _count++;
 
-                            if (_count == 1) {
-                                _timeout = setTimeout(function () {
-                                    if (_currentNode) {
-                                        if (_count >= 3 && _enable) {
-                                            _showPreviewWindow();
-                                            _reset();
-                                        } else {
-                                            _openLink = true;
-                                            _currentNode.click();
-                                        }
+                        if (_count == 1) {
+                            _timeout = setTimeout(function () {
+                                if (_currentNode) {
+                                    if (_count >= 3 && _enable) {
+                                        _showPreviewWindow();
+                                        _reset();
+                                    } else {
+                                        _openLink = true;
+                                        _currentNode.click();
                                     }
-                                }, _hoverTimeout);
-                            }
-                            event.preventDefault();
-                        } else {
-                            _reset.call(_this);
+                                }
+                            }, _hoverTimeout);
                         }
+                        event.preventDefault();
                     } else {
                         _reset.call(_this);
                     }
-                });
-            })();
+                } else {
+                    _reset.call(_this);
+                }
+            });
         }
 
         var body = document.querySelector('body');
@@ -198,11 +197,9 @@
     function _showPreviewWindow() {
         var positionBox = _currentNode.getBoundingClientRect();
 
-        var _findQuadrant2 = _findQuadrant(positionBox);
-
-        var xQuadrant = _findQuadrant2.xQuadrant;
-        var yQuadrant = _findQuadrant2.yQuadrant;
-
+        var _findQuadrant2 = _findQuadrant(positionBox),
+            xQuadrant = _findQuadrant2.xQuadrant,
+            yQuadrant = _findQuadrant2.yQuadrant;
 
         var previewWindowData = _findPreviewWindowPosition({ xQuadrant: xQuadrant, yQuadrant: yQuadrant, positionBox: positionBox });
         previewWindowData.src = _currentNode.getAttribute('href');
@@ -222,8 +219,8 @@
     }
 
     function _findQuadrant(positionBox) {
-        var x = positionBox.left;
-        var y = positionBox.top;
+        var x = positionBox.left,
+            y = positionBox.top;
 
         console.log(x, y);
 
@@ -242,9 +239,9 @@
     }
 
     function _findPreviewWindowPosition(_ref2) {
-        var xQuadrant = _ref2.xQuadrant;
-        var yQuadrant = _ref2.yQuadrant;
-        var positionBox = _ref2.positionBox;
+        var xQuadrant = _ref2.xQuadrant,
+            yQuadrant = _ref2.yQuadrant,
+            positionBox = _ref2.positionBox;
 
 
         var top = void 0,
@@ -285,11 +282,11 @@
     }
 
     function _updatePreviewWindow(_ref3) {
-        var top = _ref3.top;
-        var bottom = _ref3.bottom;
-        var left = _ref3.left;
-        var right = _ref3.right;
-        var src = _ref3.src;
+        var top = _ref3.top,
+            bottom = _ref3.bottom,
+            left = _ref3.left,
+            right = _ref3.right,
+            src = _ref3.src;
 
         var body = document.querySelector('body');
         var iframe_wrapper = document.querySelector('.tft_iframe_wrapper');
@@ -319,5 +316,10 @@
         setCustomLoadingBackground: setCustomLoadingBackground,
         getIsMobileDevice: getIsMobileDevice
     };
-    window.threeFingerTap = threeFingerTap;
-})(window);
+
+    if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+        module.exports = threeFingerTap;
+    } else {
+        window.threeFingerTap = threeFingerTap;
+    }
+})();
