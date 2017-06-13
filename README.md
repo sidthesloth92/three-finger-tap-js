@@ -3,8 +3,6 @@
 [![release](https://img.shields.io/github/release/sidthesloth92/three-finger-tap-js.svg)](https://github.com/sidthesloth92/three-finger-tap-js/releases/tag/v1.0.1)
 [![build](https://img.shields.io/travis/sidthesloth92/three-finger-tap-js.svg)](https://travis-ci.org/sidthesloth92/three-finger-tap-js/builds)
 [![dependencies](https://david-dm.org/sidthesloth92/three-finger-tap-js.svg)](https://david-dm.org/sidthesloth92/three-finger-tap-js)
-[![NPM Downloads](https://img.shields.io/npm/dt/https://github.com/sidthesloth92/three-finger-tap-js.svg)](https://www.npmjs.com/package/https://github.com/sidthesloth92/three-finger-tap-js)
-
 
 
 A small (actually really small, around 1KB) library, that attempts to mimic the three finger tap behaviour exhibited when you 
@@ -24,7 +22,7 @@ In mobile, the user has to triple tap on a URL to open the preview window.
 ![alt text](https://s19.postimg.org/ivqm47ddv/ezgif_com_video_to_gif_1.gif "Snippets Preview")
 
 ### Mobile
-![alt text](https://s19.postimg.org/xucadsfib/ezgif_3450773392.gif "Snippets Preview")
+![alt text](https://s19.postimg.org/xucadsfib/ezgif-3450773392.gif "Snippets Preview")
 
 ## Demo
 

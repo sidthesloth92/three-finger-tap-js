@@ -10,6 +10,7 @@
     background-size: 50px;
     background-position: center;
     transform: scale(0, 0);
+    overflow: scroll;
     &.show {
         display: block;
         visibility: visible;
