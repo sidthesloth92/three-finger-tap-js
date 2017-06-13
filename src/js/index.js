@@ -125,6 +125,7 @@
         }
     }
     let _count = 0;
+    let _openLink = false;
     function _addEventListeners() {
          function _reset() {
             _openLink = false;
@@ -152,7 +153,7 @@
             });
         }
         else {
-            let _openLink = false;
+            _openLink = false;
             window.addEventListener('click', (event) => {
                 if (event.target.classList.contains(_name)) {
                     if(event.target !== _currentNode) {
