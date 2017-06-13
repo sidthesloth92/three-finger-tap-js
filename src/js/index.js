@@ -1,16 +1,16 @@
-((window) => {
+(() => {
 
     // Private variables
-    let _currentNode;
-    let _timeout;
-    let _name;
-    let _initialized;
-    let _isMobile;
+    let _currentNode;                   // specifies the current DOM element hovered or tapped
+    let _timeout;                       // specifies the hover timeout or tap timeout
+    let _name;                          // specifies the CSS class name
+    let _initialized;                   // specifies whether the library is initialized or not
+    let _isMobile;                      // indicates a mobile device or nont
 
     // API variables
-    let _hoverTimeout = 2000;
-    let _customLoadingBackground;
-    let _enable = true;
+    let _hoverTimeout = 2000;           // user specified value for the hover timeout, set to 500 if mobile
+    let _customLoadingBackground;       // user specified backgroundImage CSS value
+    let _enable = true;                 // user specified value indicating whether the library is currently active
 
     // API Methods
     function init({ name, hoverTimeout, customLoadingBackground}) {
@@ -292,7 +292,7 @@
         iframe.setAttribute('src', src);
     }
 
-    var threeFingerTap = {
+    let threeFingerTap =  {
         init,
         enable,
         disable,
@@ -304,5 +304,13 @@
         setCustomLoadingBackground,
         getIsMobileDevice
     };
-    window.threeFingerTap = threeFingerTap;
-})(window);
+
+    if(typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+        module.exports = threeFingerTap;
+    }
+    else {
+        window.threeFingerTap = threeFingerTap;
+    }
+})();
+
+
