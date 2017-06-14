@@ -35,6 +35,23 @@
         setCustomLoadingBackground(customLoadingBackground);
         _constructDOM();
         _addEventListeners();
+        _enable = true;
+    }
+
+    function destroy() {
+        _body.removeChild(_iframeWrapper);
+
+        window.removeEventListener('mousemove', _browserFunctionality);
+        window.removeEventListener('click', _mobileFunctionality);
+
+        _body.removeEventListener('click', _hidePreviewWindow);
+
+        _body = _iframeWrapper = _iframe = _name = _isMobile = _customLoadingBackground = undefined;
+        _reset();
+
+        _initialized = false;
+        _hoverTimeout = 2000;
+        _enable = false;
     }
 
     function enable() {
@@ -141,64 +158,59 @@
     }
     
     function _addEventListeners() {
-        if(!_isMobile) {
-            window.addEventListener('mousemove', (event) => {
-                if (_enable && event.target.classList.contains(_name)) {
-                    if (!_currentNode) {
-                        _currentNode = event.target;
-                        _timeout = setTimeout(() => {
-                            if (_currentNode && _currentNode.classList.contains(_name)) {
-                                _showPreviewWindow();
-                            }
-                        }, _hoverTimeout);
-                    }
-                }
-                else {
-                    _reset();
-                }
-            });
-        }
-        else {
+        if (!_isMobile) {
+            window.addEventListener('mousemove', _browserFunctionality);
+        } else {
             _openLink = false;
-            window.addEventListener('click', (event) => {
-                if (event.target.classList.contains(_name)) {
-                    if(event.target !== _currentNode) {
-                        _count = 0;
-                        _currentNode = event.target;
-                        clearTimeout(_timeout);
-                    }
-                    if(!_openLink) {
-                         _count++;
-
-                        if(_count == 1) {
-                            _timeout = setTimeout(() => {
-                                if(_currentNode) {
-                                    if(_count >= 3 && _enable) {
-                                        _showPreviewWindow();
-                                        _reset();
-                                    }
-                                    else {
-                                        _openLink = true;
-                                        _currentNode.click();
-                                    }
-                                }
-                            }, _hoverTimeout);
-                        }
-                        event.preventDefault();
-                    }
-                    else {
-                        _reset();
-                    }
-                }
-                else {
-                    _reset();
-                }
-            });
+            window.addEventListener('click', _mobileFunctionality);
         }
         _body.addEventListener('click', _hidePreviewWindow);
     }
+    function _browserFunctionality(event) {
+        if (_enable && event.target.classList.contains(_name)) {
+            if (!_currentNode) {
+                _currentNode = event.target;
+                _timeout = setTimeout(function () {
+                    if (_currentNode && _currentNode.classList.contains(_name)) {
+                        _showPreviewWindow();
+                    }
+                }, _hoverTimeout);
+            }
+        } else {
+            _reset();
+        }
+    }
+    function _mobileFunctionality(event) {
+        if (event.target.classList.contains(_name)) {
+            if (event.target !== _currentNode) {
+                _count = 0;
+                _currentNode = event.target;
+                clearTimeout(_timeout);
+            }
+            if (!_openLink) {
+                _count++;
 
-
+                if (_count == 1) {
+                    _timeout = setTimeout(function () {
+                        if (_currentNode) {
+                            if (_count >= 3 && _enable) {
+                                _showPreviewWindow();
+                                _reset();
+                            } else {
+                                _openLink = true;
+                                _currentNode.click();
+                            }
+                        }
+                    }, _hoverTimeout);
+                }
+                event.preventDefault();
+            } else {
+                _reset();
+            }
+        } else {
+            _reset();
+        }
+    }
 
     function _showPreviewWindow() {
         let positionBox = _currentNode.getBoundingClientRect();
@@ -289,6 +301,7 @@
 
     let threeFingerTap =  {
         init,
+        destroy,
         enable,
         disable,
         setName,
