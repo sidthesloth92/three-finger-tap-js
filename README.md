@@ -1,7 +1,6 @@
 ![Library Logo](https://raw.githubusercontent.com/sidthesloth92/three-finger-tap-js/master/logo/logo.png)
-![Library Logo](https://raw.githubusercontent.com/sidthesloth92/three-finger-tap-js/master/logo/text.png)
 
-# three-finger-tap-js
+![Library Logo](https://raw.githubusercontent.com/sidthesloth92/three-finger-tap-js/master/logo/text.png)
 
 [![release](https://img.shields.io/github/release/sidthesloth92/three-finger-tap-js.svg)](https://github.com/sidthesloth92/three-finger-tap-js/releases/tag/v1.0.1)
 [![build](https://img.shields.io/travis/sidthesloth92/three-finger-tap-js.svg)](https://travis-ci.org/sidthesloth92/three-finger-tap-js/builds)
