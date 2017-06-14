@@ -1,3 +1,5 @@
+'use strict';
+
 const threeFingerTap = require('../dist/js/threeFingerTap.js');
 
 let name = 'three-finger-tap';
