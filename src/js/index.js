@@ -97,6 +97,13 @@
         return window.hasOwnProperty('ontouchstart');
     }
 
+    function _reset() {
+        _currentNode = undefined;
+        _openLink = false;
+        _count = 0;
+        clearTimeout(_timeout);
+    }
+
     function _constructDOM() {
         let fragment = document.createDocumentFragment();
 
@@ -134,17 +141,10 @@
     }
     
     function _addEventListeners() {
-         function _reset() {
-            _openLink = false;
-            _count = 0;
-            _currentNode = undefined;
-            clearTimeout(_timeout);
-        }
-
         if(!_isMobile) {
             window.addEventListener('mousemove', (event) => {
-                if (event.target.classList.contains(_name)) {
-                    if (!_currentNode && _enable) {
+                if (_enable && event.target.classList.contains(_name)) {
+                    if (!_currentNode) {
                         _currentNode = event.target;
                         _timeout = setTimeout(() => {
                             if (_currentNode && _currentNode.classList.contains(_name)) {
@@ -154,8 +154,7 @@
                     }
                 }
                 else {
-                    _currentNode = undefined;
-                    clearTimeout(_timeout);
+                    _reset();
                 }
             });
         }
@@ -188,17 +187,14 @@
                         event.preventDefault();
                     }
                     else {
-                        _reset.call(this);
+                        _reset();
                     }
                 }
                 else {
-                    _reset.call(this);
+                    _reset();
                 }
             });
-
-           
         }
-        
         _body.addEventListener('click', _hidePreviewWindow);
     }
 
