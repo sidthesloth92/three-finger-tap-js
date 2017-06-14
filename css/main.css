@@ -87,7 +87,6 @@ p {
 
 .header {
   height: 450px;
-  background-image: -webkit-linear-gradient(left, #ffafbd, #fffabf);
   background-image: linear-gradient(to right, #ffafbd, #fffabf);
   font-family: "Comfortaa", sans-serif;
   color: white;
@@ -106,6 +105,15 @@ p {
           flex-direction: column;
   margin-bottom: 100px;
   text-align: center; }
+  .header .header--logo {
+    background: white;
+    padding: 10px;
+    border-radius: 100%;
+    border: 5px solid #fffabf;
+    margin-bottom: 20px; }
+    .header .header--logo img {
+      width: 75px;
+      height: 75px; }
   .header .header--title {
     font-size: 50px;
     margin-bottom: 30px; }
@@ -194,7 +202,6 @@ p {
           top: 3px;
           border: 1px solid #E0E0E0;
           border-radius: 100%;
-          -webkit-transition: all .2s;
           transition: all .2s; }
         .demo_page_wrapper .body_wrapper .section--demo .section--general--checkbox .enable--disable--button.enable {
           border: 1px solid #FFB0BD; }
