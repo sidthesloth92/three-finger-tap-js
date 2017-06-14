@@ -14,6 +14,15 @@
     var _customLoadingBackground = void 0; // user specified backgroundImage CSS value
     var _enable = true; // user specified value indicating whether the library is currently active
 
+    // Private variables
+    var _count = 0; // number of times the user has tapped the link within the timeout
+    var _openLink = false;
+
+    // DOM nodes
+    var _body = void 0;
+    var _iframeWrapper = void 0;
+    var _iframe = void 0;
+
     // API Methods
     function init(_ref) {
         var name = _ref.name,
@@ -86,63 +95,59 @@
     function getIsMobileDevice() {
         return _isMobile;
     }
+
     // Private Methods
     function _isTouchDevice() {
         return window.hasOwnProperty('ontouchstart');
     }
 
-    function _constructDOM() {
+    function _reset() {
+        _currentNode = undefined;
+        _openLink = false;
+        _count = 0;
+        clearTimeout(_timeout);
+    }
 
+    function _constructDOM() {
         var fragment = document.createDocumentFragment();
 
-        var iframeWrapper = document.createElement('div');
-        iframeWrapper.classList.add('tft_iframe_wrapper');
+        _body = document.querySelector('body');
+        _iframeWrapper = document.createElement('div');
+        _iframeWrapper.classList.add('tft_iframe_wrapper');
 
-        var iframe = document.createElement('iframe');
-        iframeWrapper.appendChild(iframe);
+        _iframe = document.createElement('iframe');
+        _iframeWrapper.appendChild(_iframe);
 
-        fragment.appendChild(iframeWrapper);
-        document.querySelector('body').appendChild(fragment);
+        fragment.appendChild(_iframeWrapper);
+        _body.appendChild(fragment);
 
         _updateCustomLoadingBackground();
     }
 
     function _updateCustomLoadingBackground() {
-        var iframeWrapper = document.querySelector('.tft_iframe_wrapper');
-
-        if (iframeWrapper) {
+        if (_iframeWrapper) {
             if (!_customLoadingBackground) {
-                iframeWrapper.style.backgroundImage = "";
+                _iframeWrapper.style.backgroundImage = "";
 
                 var loader = document.createElement('div');
                 loader.classList.add('loader');
-                iframeWrapper.appendChild(loader);
+                _iframeWrapper.appendChild(loader);
             } else {
-                var _loader = iframeWrapper.querySelector('.loader');
+                var _loader = _iframeWrapper.querySelector('.loader');
                 if (_loader) {
                     _loader.remove();
                 }
 
-                iframeWrapper.style.backgroundImage = _customLoadingBackground;
+                _iframeWrapper.style.backgroundImage = _customLoadingBackground;
             }
         }
     }
-    var _count = 0;
-    var _openLink = false;
+
     function _addEventListeners() {
-        var _this = this;
-
-        function _reset() {
-            _openLink = false;
-            _count = 0;
-            _currentNode = undefined;
-            clearTimeout(_timeout);
-        }
-
         if (!_isMobile) {
             window.addEventListener('mousemove', function (event) {
-                if (event.target.classList.contains(_name)) {
-                    if (!_currentNode && _enable) {
+                if (_enable && event.target.classList.contains(_name)) {
+                    if (!_currentNode) {
                         _currentNode = event.target;
                         _timeout = setTimeout(function () {
                             if (_currentNode && _currentNode.classList.contains(_name)) {
@@ -151,8 +156,7 @@
                         }, _hoverTimeout);
                     }
                 } else {
-                    _currentNode = undefined;
-                    clearTimeout(_timeout);
+                    _reset();
                 }
             });
         } else {
@@ -182,16 +186,14 @@
                         }
                         event.preventDefault();
                     } else {
-                        _reset.call(_this);
+                        _reset();
                     }
                 } else {
-                    _reset.call(_this);
+                    _reset();
                 }
             });
         }
-
-        var body = document.querySelector('body');
-        body.addEventListener('click', _hidePreviewWindow);
+        _body.addEventListener('click', _hidePreviewWindow);
     }
 
     function _showPreviewWindow() {
@@ -207,15 +209,11 @@
     }
 
     function _hidePreviewWindow(event) {
-        var body = document.querySelector('body');
-        var iframe_wrapper = document.querySelector('.tft_iframe_wrapper');
-        var iframe = iframe_wrapper.querySelector('iframe');
-
-        iframe_wrapper.classList.remove('show');
-        iframe_wrapper.style.left = "";
-        iframe_wrapper.style.top = "";
-        iframe.setAttribute('src', '');
-        body.classList.remove('noscroll');
+        _iframeWrapper.classList.remove('show');
+        _iframeWrapper.style.left = "";
+        _iframeWrapper.style.top = "";
+        _iframe.setAttribute('src', '');
+        _body.classList.remove('noscroll');
     }
 
     function _findQuadrant(positionBox) {
@@ -288,20 +286,16 @@
             right = _ref3.right,
             src = _ref3.src;
 
-        var body = document.querySelector('body');
-        var iframe_wrapper = document.querySelector('.tft_iframe_wrapper');
-        var iframe = iframe_wrapper.querySelector('iframe');
+        _body.classList.add('noscroll');
+        _iframeWrapper.classList.add('show');
 
-        body.classList.add('noscroll');
-        iframe_wrapper.classList.add('show');
+        _iframeWrapper.style.top = top;
+        _iframeWrapper.style.bottom = bottom;
 
-        iframe_wrapper.style.top = top;
-        iframe_wrapper.style.bottom = bottom;
+        _iframeWrapper.style.left = left;
+        _iframeWrapper.style.right = right;
 
-        iframe_wrapper.style.left = left;
-        iframe_wrapper.style.right = right;
-
-        iframe.setAttribute('src', src);
+        _iframe.setAttribute('src', src);
     }
 
     var threeFingerTap = {

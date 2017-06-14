@@ -1,7 +1,7 @@
 .tft_iframe_wrapper {
   position: fixed;
-  width: 70vw;
-  height: 45vh;
+  width: 70%;
+  height: 45%;
   box-shadow: 0px 0px 5px 0px #4b4b4b;
   visibility: hidden;
   transition: -webkit-transform .1s linear;
