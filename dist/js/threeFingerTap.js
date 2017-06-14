@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 (function () {
 
@@ -40,6 +40,23 @@
         setCustomLoadingBackground(customLoadingBackground);
         _constructDOM();
         _addEventListeners();
+        _enable = true;
+    }
+
+    function destroy() {
+        _body.removeChild(_iframeWrapper);
+
+        window.removeEventListener('mousemove', _browserFunctionality);
+        window.removeEventListener('click', _mobileFunctionality);
+
+        _body.removeEventListener('click', _hidePreviewWindow);
+
+        _body = _iframeWrapper = _iframe = _name = _isMobile = _customLoadingBackground = undefined;
+        _reset();
+
+        _initialized = false;
+        _hoverTimeout = 2000;
+        _enable = false;
     }
 
     function enable() {
@@ -145,55 +162,57 @@
 
     function _addEventListeners() {
         if (!_isMobile) {
-            window.addEventListener('mousemove', function (event) {
-                if (_enable && event.target.classList.contains(_name)) {
-                    if (!_currentNode) {
-                        _currentNode = event.target;
-                        _timeout = setTimeout(function () {
-                            if (_currentNode && _currentNode.classList.contains(_name)) {
-                                _showPreviewWindow();
-                            }
-                        }, _hoverTimeout);
-                    }
-                } else {
-                    _reset();
-                }
-            });
+            window.addEventListener('mousemove', _browserFunctionality);
         } else {
             _openLink = false;
-            window.addEventListener('click', function (event) {
-                if (event.target.classList.contains(_name)) {
-                    if (event.target !== _currentNode) {
-                        _count = 0;
-                        _currentNode = event.target;
-                        clearTimeout(_timeout);
-                    }
-                    if (!_openLink) {
-                        _count++;
-
-                        if (_count == 1) {
-                            _timeout = setTimeout(function () {
-                                if (_currentNode) {
-                                    if (_count >= 3 && _enable) {
-                                        _showPreviewWindow();
-                                        _reset();
-                                    } else {
-                                        _openLink = true;
-                                        _currentNode.click();
-                                    }
-                                }
-                            }, _hoverTimeout);
-                        }
-                        event.preventDefault();
-                    } else {
-                        _reset();
-                    }
-                } else {
-                    _reset();
-                }
-            });
+            window.addEventListener('click', _mobileFunctionality);
         }
         _body.addEventListener('click', _hidePreviewWindow);
+    }
+    function _browserFunctionality(event) {
+        if (_enable && event.target.classList.contains(_name)) {
+            if (!_currentNode) {
+                _currentNode = event.target;
+                _timeout = setTimeout(function () {
+                    if (_currentNode && _currentNode.classList.contains(_name)) {
+                        _showPreviewWindow();
+                    }
+                }, _hoverTimeout);
+            }
+        } else {
+            _reset();
+        }
+    }
+    function _mobileFunctionality(event) {
+        if (event.target.classList.contains(_name)) {
+            if (event.target !== _currentNode) {
+                _count = 0;
+                _currentNode = event.target;
+                clearTimeout(_timeout);
+            }
+            if (!_openLink) {
+                _count++;
+
+                if (_count == 1) {
+                    _timeout = setTimeout(function () {
+                        if (_currentNode) {
+                            if (_count >= 3 && _enable) {
+                                _showPreviewWindow();
+                                _reset();
+                            } else {
+                                _openLink = true;
+                                _currentNode.click();
+                            }
+                        }
+                    }, _hoverTimeout);
+                }
+                event.preventDefault();
+            } else {
+                _reset();
+            }
+        } else {
+            _reset();
+        }
     }
 
     function _showPreviewWindow() {
@@ -228,7 +247,7 @@
         var xPointTwo = window.innerWidth / 2 + 0.1 * window.innerWidth;
         var xQuadrant = x < xPointOne ? 0 : x < xPointTwo ? 1 : 2;
         var yQuadrant = y < window.innerHeight / 2 ? 0 : 1;
-        console.log("xQuadrant: " + xQuadrant + ", yQuadrant : " + yQuadrant);
+        console.log('xQuadrant: ' + xQuadrant + ', yQuadrant : ' + yQuadrant);
 
         return {
             xQuadrant: xQuadrant,
@@ -268,8 +287,8 @@
         // var left = (0.3 * window.innerWidth) - (((0.3 * window.innerWidth) / 2) * xQuadrant);
         // var top = (0.3 * window.innerHeight) - (((0.3 * window.innerHeight) / 2) * yQuadrant);
 
-        console.log("top: " + top + " bottom : " + bottom);
-        console.log("left : " + left + " right : " + right);
+        console.log('top: ' + top + ' bottom : ' + bottom);
+        console.log('left : ' + left + ' right : ' + right);
 
         return {
             top: top,
@@ -300,6 +319,7 @@
 
     var threeFingerTap = {
         init: init,
+        destroy: destroy,
         enable: enable,
         disable: disable,
         setName: setName,
