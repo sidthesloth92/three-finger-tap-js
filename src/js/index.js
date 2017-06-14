@@ -11,6 +11,15 @@
     let _hoverTimeout = 2000;           // user specified value for the hover timeout, set to 500 if mobile
     let _customLoadingBackground;       // user specified backgroundImage CSS value
     let _enable = true;                 // user specified value indicating whether the library is currently active
+    
+    // Private variables
+    let _count = 0;                     // number of times the user has tapped the link within the timeout
+    let _openLink = false;      
+
+    // DOM nodes
+    let _body;
+    let _iframeWrapper;
+    let _iframe;
 
     // API Methods
     function init({ name, hoverTimeout, customLoadingBackground}) {
@@ -82,50 +91,48 @@
     function getIsMobileDevice() {
         return _isMobile;
     }
+
     // Private Methods
     function _isTouchDevice() {
         return window.hasOwnProperty('ontouchstart');
     }
 
     function _constructDOM() {
+        let fragment = document.createDocumentFragment();
 
-        var fragment = document.createDocumentFragment();
+        _body = document.querySelector('body');
+        _iframeWrapper = document.createElement('div');
+        _iframeWrapper.classList.add('tft_iframe_wrapper');
 
-        var iframeWrapper = document.createElement('div');
-        iframeWrapper.classList.add('tft_iframe_wrapper');
+        _iframe = document.createElement('iframe');
+        _iframeWrapper.appendChild(_iframe);
 
-        var iframe = document.createElement('iframe');
-        iframeWrapper.appendChild(iframe);
-
-        fragment.appendChild(iframeWrapper);
-        document.querySelector('body').appendChild(fragment);
+        fragment.appendChild(_iframeWrapper);
+        _body.appendChild(fragment);
 
         _updateCustomLoadingBackground();
     }
 
     function _updateCustomLoadingBackground() {
-        let iframeWrapper = document.querySelector('.tft_iframe_wrapper');
-
-        if (iframeWrapper) {
+        if (_iframeWrapper) {
             if (!_customLoadingBackground) {
-                iframeWrapper.style.backgroundImage = "";
+                _iframeWrapper.style.backgroundImage = "";
 
                 let loader = document.createElement('div');
                 loader.classList.add('loader');
-                iframeWrapper.appendChild(loader);
+                _iframeWrapper.appendChild(loader);
             }
             else {
-                let loader = iframeWrapper.querySelector('.loader');
+                let loader = _iframeWrapper.querySelector('.loader');
                 if(loader) {
                     loader.remove();
                 }
 
-                iframeWrapper.style.backgroundImage = _customLoadingBackground;
+                _iframeWrapper.style.backgroundImage = _customLoadingBackground;
             }
         }
     }
-    let _count = 0;
-    let _openLink = false;
+    
     function _addEventListeners() {
          function _reset() {
             _openLink = false;
@@ -192,8 +199,7 @@
            
         }
         
-        let body = document.querySelector('body');
-        body.addEventListener('click', _hidePreviewWindow);
+        _body.addEventListener('click', _hidePreviewWindow);
     }
 
 
@@ -208,15 +214,11 @@
     }
 
     function _hidePreviewWindow(event) {
-        let body = document.querySelector('body');
-        let iframe_wrapper = document.querySelector('.tft_iframe_wrapper');
-        let iframe = iframe_wrapper.querySelector('iframe');
-
-        iframe_wrapper.classList.remove('show');
-        iframe_wrapper.style.left = "";
-        iframe_wrapper.style.top = "";
-        iframe.setAttribute('src', '');
-        body.classList.remove('noscroll');
+        _iframeWrapper.classList.remove('show');
+        _iframeWrapper.style.left = "";
+        _iframeWrapper.style.top = "";
+        _iframe.setAttribute('src', '');
+        _body.classList.remove('noscroll');
     }
 
     function _findQuadrant(positionBox) {
@@ -277,20 +279,16 @@
     }
 
     function _updatePreviewWindow({ top, bottom, left, right, src }) {
-        let body = document.querySelector('body');
-        let iframe_wrapper = document.querySelector('.tft_iframe_wrapper');
-        let iframe = iframe_wrapper.querySelector('iframe');
+        _body.classList.add('noscroll');
+        _iframeWrapper.classList.add('show');
 
-        body.classList.add('noscroll');
-        iframe_wrapper.classList.add('show');
+        _iframeWrapper.style.top = top;
+        _iframeWrapper.style.bottom = bottom;
 
-        iframe_wrapper.style.top = top;
-        iframe_wrapper.style.bottom = bottom;
+        _iframeWrapper.style.left = left;
+        _iframeWrapper.style.right = right;
 
-        iframe_wrapper.style.left = left;
-        iframe_wrapper.style.right = right;
-
-        iframe.setAttribute('src', src);
+        _iframe.setAttribute('src', src);
     }
 
     let threeFingerTap =  {
