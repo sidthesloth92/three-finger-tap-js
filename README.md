@@ -1,4 +1,5 @@
-<img src="https://raw.githubusercontent.com/sidthesloth92/three-finger-tap-js/master/logo/logo.png" alt="Logo" style="width: 200px;height: 200px;"/>
+![Library Logo](https://raw.githubusercontent.com/sidthesloth92/three-finger-tap-js/master/logo/logo.png)
+![Library Logo](https://raw.githubusercontent.com/sidthesloth92/three-finger-tap-js/master/logo/text.png)
 
 # three-finger-tap-js
 
