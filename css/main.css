@@ -106,14 +106,15 @@ p {
   margin-bottom: 100px;
   text-align: center; }
   .header .header--logo {
+    width: 75px;
+    height: 75px;
     background: white;
     padding: 10px;
     border-radius: 100%;
     border: 5px solid #fffabf;
     margin-bottom: 20px; }
     .header .header--logo img {
-      width: 75px;
-      height: 75px; }
+      width: 75px; }
   .header .header--title {
     font-size: 50px;
     margin-bottom: 30px; }
