@@ -70,7 +70,7 @@ An object with name, hoverTimeout and customLoadingBackground as keys.
 | Name | Description | Type | Required | Default |
 | :--- | :---------- | :--: | :------: | :-----: |
 | name | name of the CSS class name that will be used to identify the links to apply the hover effect on | String | yes | N/A |
-| hoverTimeout | the duration for which a user needs to hover over an URL before the preview window appears. The value should be in milliseconds (Desktop only) | Number | no | 2000 for Desktop/ 500 for Mobile |
+| hoverTimeout | the duration for which a user needs to hover over an URL before the preview window appears. The value should be in milliseconds (Desktop only) | Number | yes |  Ignored and set to 500 for Mobile |
 | customLoadingBackground | By default a loading background is added, you can use this parameter to set a custom image or gif as background. The value should be a valid value for the CSS `background-image` property. The path to the image/gif should be relative to page the effect will be displayed | String | no | N/A |
 
 **Usage**
@@ -119,6 +119,16 @@ threeFingerTap.enable();
 | setHoverTimeout | Updates the `hoverTimeout` to the value passed as parameter for desktop. In case of mobile, ignore the parameter passed. | Number | yes | milliseconds |
 | getCustomLoadingBackground | Returns the current value of the `customLoadingBackground` option | N/A | N/A | N/A |
 | setCustomLoadingBackground | Sets the loading effect to the passed GIF/image | String | yes | A valid value for the CSS `background-image` property |
+
+`destroy`
+
+Removes the DOM nodes addes and their respective event listeners. Also resets the library to the initial state.
+
+**Usage**
+
+```javascript
+threeFingerTap.destroy();
+```
 
 # Contact
 If you have any issues report them at [Issues](https://github.com/sidthesloth92/three-finger-tap-js/issues)
