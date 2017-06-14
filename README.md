@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/sidthesloth92/three-finger-tap-js/master/logo/logo.png" alt="Logo" style="width: 200px;height: 200px;"/>
+
 # three-finger-tap-js
 
 [![release](https://img.shields.io/github/release/sidthesloth92/three-finger-tap-js.svg)](https://github.com/sidthesloth92/three-finger-tap-js/releases/tag/v1.0.1)
@@ -122,7 +124,7 @@ threeFingerTap.enable();
 
 `destroy`
 
-Removes the DOM nodes addes and their respective event listeners. Also resets the library to the initial state.
+Removes the DOM nodes and their respective event listeners. Also resets the library to the initial state.
 
 **Usage**
 
