@@ -10,7 +10,7 @@
     var _isMobile = void 0; // indicates a mobile device or nont
 
     // API variables
-    var _hoverTimeout = 2000; // user specified value for the hover timeout, set to 500 if mobile
+    var _hoverTimeout = void 0; // user specified value for the hover timeout, set to 500 if mobile
     var _customLoadingBackground = void 0; // user specified backgroundImage CSS value
     var _enable = true; // user specified value indicating whether the library is currently active
 
@@ -51,11 +51,10 @@
 
         _body.removeEventListener('click', _hidePreviewWindow);
 
-        _body = _iframeWrapper = _iframe = _name = _isMobile = _customLoadingBackground = undefined;
+        _body = _iframeWrapper = _iframe = _name = _isMobile = _customLoadingBackground = _hoverTimeout = undefined;
         _reset();
 
         _initialized = false;
-        _hoverTimeout = 2000;
         _enable = false;
     }
 
