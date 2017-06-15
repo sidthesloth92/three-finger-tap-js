@@ -5,9 +5,9 @@
 [![release](https://img.shields.io/github/release/sidthesloth92/three-finger-tap-js.svg)](https://github.com/sidthesloth92/three-finger-tap-js/releases/tag/v1.0.1)
 [![build](https://img.shields.io/travis/sidthesloth92/three-finger-tap-js.svg)](https://travis-ci.org/sidthesloth92/three-finger-tap-js/builds)
 [![dependencies](https://david-dm.org/sidthesloth92/three-finger-tap-js.svg)](https://david-dm.org/sidthesloth92/three-finger-tap-js)
+[![dependencies](https://img.shields.io/npm/dt/three-finger-tap-js.svg)](https://img.shields.io/npm/dt/three-finger-tap-js.svg)
 
-
-A small (actually really small, around 1KB) library, that attempts to mimic the three finger tap behaviour exhibited when you 
+A small (actually really small, around 4KB) library, that attempts to mimic the three finger tap behaviour exhibited when you 
 tap on a URL with three fingers in Safari.
 
 In Safari, when the user taps on a hyperlink using three fingers, a small preview window opens that shows the webpage the
