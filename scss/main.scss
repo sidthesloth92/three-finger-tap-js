@@ -77,9 +77,11 @@ p {
     text-align: center;
 
     .header--logo {
+        position: relative;
         width: 75px;
         height: 75px;
-        background: white;
+        overflow: hidden;
+        background: inherit;
         padding: 10px;
         border-radius: 100%;
         border: 5px solid #fffabf;
@@ -87,6 +89,31 @@ p {
         img {
             width: 75px;
         }
+
+        &:after {
+            content: "";
+            position: absolute;
+            top: -110%;
+            left: -210%;
+            width: 200%;
+            height: 200%;
+
+            transform: rotate(30deg);
+            
+            background: rgba(255, 255, 255, 0.13);
+            background: linear-gradient(
+                to right, 
+                rgba(255, 255, 255, 0.13) 0%,
+                rgba(255, 255, 255, 0.13) 77%,
+                rgba(255, 255, 255, 0.5) 92%,
+                rgba(255, 255, 255, 0.0) 100%
+            );
+
+            animation-name: gloss;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+        }
+
     }
     .header--title {
         font-size: 50px;
@@ -170,6 +197,18 @@ p {
     }
 }
 
+@keyframes gloss {
+    50% {
+        opacity: 1;
+        top: -30%;
+        left: -30%;
+    }
+    100% {
+        opacity: 0;
+        top: -30%;
+        left: -30%;
+    }
+}
 
 /*---------------------------------------------- demo.html ----------------------------------------------*/
 

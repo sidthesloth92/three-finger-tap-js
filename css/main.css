@@ -106,15 +106,34 @@ p {
   margin-bottom: 100px;
   text-align: center; }
   .header .header--logo {
+    position: relative;
     width: 75px;
     height: 75px;
-    background: white;
+    overflow: hidden;
+    background: inherit;
     padding: 10px;
     border-radius: 100%;
     border: 5px solid #fffabf;
     margin-bottom: 20px; }
     .header .header--logo img {
       width: 75px; }
+    .header .header--logo:after {
+      content: "";
+      position: absolute;
+      top: -110%;
+      left: -210%;
+      width: 200%;
+      height: 200%;
+      -webkit-transform: rotate(30deg);
+              transform: rotate(30deg);
+      background: rgba(255, 255, 255, 0.13);
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.13) 77%, rgba(255, 255, 255, 0.5) 92%, rgba(255, 255, 255, 0) 100%);
+      -webkit-animation-name: gloss;
+              animation-name: gloss;
+      -webkit-animation-duration: 3s;
+              animation-duration: 3s;
+      -webkit-animation-iteration-count: infinite;
+              animation-iteration-count: infinite; }
   .header .header--title {
     font-size: 50px;
     margin-bottom: 30px; }
@@ -172,6 +191,26 @@ p {
         font-weight: lighter; }
   .body_wrapper .section--installation {
     margin-bottom: 30px; }
+
+@-webkit-keyframes gloss {
+  50% {
+    opacity: 1;
+    top: -30%;
+    left: -30%; }
+  100% {
+    opacity: 0;
+    top: -30%;
+    left: -30%; } }
+
+@keyframes gloss {
+  50% {
+    opacity: 1;
+    top: -30%;
+    left: -30%; }
+  100% {
+    opacity: 0;
+    top: -30%;
+    left: -30%; } }
 
 /*---------------------------------------------- demo.html ----------------------------------------------*/
 .demo_page_wrapper {
