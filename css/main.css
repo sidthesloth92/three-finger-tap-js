@@ -110,7 +110,7 @@ p {
     width: 75px;
     height: 75px;
     overflow: hidden;
-    background: inherit;
+    background: #FFF9E1;
     padding: 10px;
     border-radius: 100%;
     border: 5px solid #fffabf;
