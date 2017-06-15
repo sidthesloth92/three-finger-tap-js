@@ -13,7 +13,8 @@
   background-position: center;
   -webkit-transform: scale(0, 0);
           transform: scale(0, 0);
-  overflow: auto; }
+  overflow: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar; }
   .tft_iframe_wrapper.show {
     display: block;
     visibility: visible;
