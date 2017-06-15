@@ -11,6 +11,8 @@
     background-position: center;
     transform: scale(0, 0);
     overflow: auto;
+    // To remove scrollbar from appearing in IE Edge
+    -ms-overflow-style: -ms-autohiding-scrollbar;
 
     &.show {
         display: block;
