@@ -23,10 +23,10 @@ In mobile, the user has to triple tap on a URL to open the preview window.
 
 ### Desktop
 
-![alt text](https://s19.postimg.org/ivqm47ddv/ezgif_com_video_to_gif_1.gif "Snippets Preview")
+![Desktop Demo](https://s19.postimg.org/ivqm47ddv/ezgif_com_video_to_gif_1.gif "Snippets Preview")
 
 ### Mobile
-#[alt text](https://s12.postimg.org/6jx9wh33x/ezgif-3450773392_copy.gif "Snippets Preview")
+#[Mobile Demo](https://s12.postimg.org/6jx9wh33x/ezgif-3450773392_copy.gif "Snippets Preview")
 
 ## Demo
 
@@ -140,9 +140,10 @@ Removes the DOM nodes and their respective event listeners. Also resets the libr
 threeFingerTap.destroy();
 ```
 
-# Browsers Support
+# Browsers support
 
 | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/edge.png" alt="IE / Edge" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/firefox.png" alt="Firefox" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome.png" alt="Chrome" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari.png" alt="Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/opera.png" alt="Opera" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
+| --------- | --------- | --------- | --------- | --------- |
 
 # Contact
 If you have any issues report them at [Issues](https://github.com/sidthesloth92/three-finger-tap-js/issues)
