@@ -23,6 +23,21 @@ $snippet-background: #F8F8F8;
     font-style: normal;
 }
 
+html, body {
+
+    @media (max-width: 719px) {
+        font-size: 12px;
+    }
+    
+    @media (min-width: 720px) and (max-width: 1023px) {
+        font-size: 14px;
+    }
+
+    @media (min-width: 1024px) {
+        font-size: 16px;
+    }
+}
+
 //General Rules
 
 h1, h2, h3, h4, h5, h6, pre {
@@ -36,14 +51,14 @@ p {
 
 .section--general {
     .section--general--heading {
-        font-size: 36px;
+        font-size: 2.25rem;
         font-weight: bold;
         border-bottom: 1px solid $border-color;
         padding-bottom: 15px;
         margin-bottom: 20px;
     }
     .section--general--text {
-        font-size: 18px;
+        font-size: 1.125rem;
         line-height: 24px;
         letter-spacing: 0.2px;
         margin-bottom: 20px;
@@ -56,8 +71,8 @@ p {
 
     .section--general--snippet {
         background: $snippet-background;
-        font-size: 14px;
-        line-height: 18px;
+        font-size: 0.875rem;
+        line-height: 1.125rem;
         padding: 13px 0px 13px 45px;
         margin-bottom: 15px;
         overflow: scroll;
@@ -116,13 +131,13 @@ p {
 
     }
     .header--title {
-        font-size: 50px;
-        margin-bottom: 30px;
+        font-size: 3.125rem;
+        margin-bottom: 1.875rem;
     }
 
     .header--description {
-        font-size: 20px;
-        margin-bottom: 50px;
+        font-size: 1.25rem;
+        margin-bottom: 3.125rem;
         text-align: center;
     }
 
@@ -131,14 +146,12 @@ p {
         .button {
             display: inline-block;
             box-sizing: border-box;
-            width: 235px;
-            height: 60px;
             border: 1px solid white;
             border-radius: 10px;
             text-align: center;
-            padding-top: 15px;
-            font-size: 20px;
-            margin: 0px 15px;
+            padding: 0.9375rem;
+            font-size: 1.25rem;
+            margin: 0px 0.9375rem;
 
             &:first-child {
                 margin-bottom : 15px;
@@ -146,13 +159,13 @@ p {
 
             .button--icon {
                 display: inline-block;
-                width: 25px;
-                height: 25px;
+                width: 1.5625rem;
+                height: 1.5625rem;
                 margin-right: 10px;
             }
 
             .button--text {
-                font-size: 20px;
+                font-size: 1.25rem;
                 display: inline-block;
                 vertical-align: text-top;
 
@@ -168,12 +181,12 @@ p {
 
 .body_wrapper {
     margin: 0 auto;
-    width: 80%;
+    padding: 0px 15px;
     margin-bottom: 80px;
     .section--main {
         margin-bottom: 80px;
         .section--main--title {
-            font-size: 40px;
+            font-size: 2.5rem;
             color: $theme-font-color-pink;
             font-weight: bold;
             text-align: center;
@@ -181,9 +194,9 @@ p {
 
         .section--main--description {
             margin-top: 50px;
-            text-align: center;
+            text-align: justify;
             p {
-                font-size: 18px;
+                font-size: 1.125rem;
                 line-height: 24px;
                 letter-spacing: 0.2px;
                 margin-bottom: 15px;
@@ -215,7 +228,7 @@ p {
 .demo_page_wrapper {
     padding-top: 50px;
     .body_wrapper {
-        width: 80%;
+        padding: 0px 15px;
         margin: 0 auto;
 
         .section--demo {

@@ -52,6 +52,18 @@ table {
   font-weight: normal;
   font-style: normal; }
 
+@media (max-width: 719px) {
+  html, body {
+    font-size: 12px; } }
+
+@media (min-width: 720px) and (max-width: 1023px) {
+  html, body {
+    font-size: 14px; } }
+
+@media (min-width: 1024px) {
+  html, body {
+    font-size: 16px; } }
+
 h1, h2, h3, h4, h5, h6, pre {
   font-family: "Comfortaa", sans-serif;
   color: #4A4A4A; }
@@ -61,14 +73,14 @@ p {
   color: #4A4A4A; }
 
 .section--general .section--general--heading {
-  font-size: 36px;
+  font-size: 2.25rem;
   font-weight: bold;
   border-bottom: 1px solid #E0E0E0;
   padding-bottom: 15px;
   margin-bottom: 20px; }
 
 .section--general .section--general--text {
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: 24px;
   letter-spacing: 0.2px;
   margin-bottom: 20px;
@@ -79,8 +91,8 @@ p {
 
 .section--general .section--general--snippet {
   background: #F8F8F8;
-  font-size: 14px;
-  line-height: 18px;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
   padding: 13px 0px 13px 45px;
   margin-bottom: 15px;
   overflow: scroll; }
@@ -135,34 +147,32 @@ p {
       -webkit-animation-iteration-count: infinite;
               animation-iteration-count: infinite; }
   .header .header--title {
-    font-size: 50px;
-    margin-bottom: 30px; }
+    font-size: 3.125rem;
+    margin-bottom: 1.875rem; }
   .header .header--description {
-    font-size: 20px;
-    margin-bottom: 50px;
+    font-size: 1.25rem;
+    margin-bottom: 3.125rem;
     text-align: center; }
   .header .button--container {
     text-align: center; }
     .header .button--container .button {
       display: inline-block;
       box-sizing: border-box;
-      width: 235px;
-      height: 60px;
       border: 1px solid white;
       border-radius: 10px;
       text-align: center;
-      padding-top: 15px;
-      font-size: 20px;
-      margin: 0px 15px; }
+      padding: 0.9375rem;
+      font-size: 1.25rem;
+      margin: 0px 0.9375rem; }
       .header .button--container .button:first-child {
         margin-bottom: 15px; }
       .header .button--container .button .button--icon {
         display: inline-block;
-        width: 25px;
-        height: 25px;
+        width: 1.5625rem;
+        height: 1.5625rem;
         margin-right: 10px; }
       .header .button--container .button .button--text {
-        font-size: 20px;
+        font-size: 1.25rem;
         display: inline-block;
         vertical-align: text-top; }
         .header .button--container .button .button--text a {
@@ -171,20 +181,20 @@ p {
 
 .body_wrapper {
   margin: 0 auto;
-  width: 80%;
+  padding: 0px 15px;
   margin-bottom: 80px; }
   .body_wrapper .section--main {
     margin-bottom: 80px; }
     .body_wrapper .section--main .section--main--title {
-      font-size: 40px;
+      font-size: 2.5rem;
       color: #fa536d;
       font-weight: bold;
       text-align: center; }
     .body_wrapper .section--main .section--main--description {
       margin-top: 50px;
-      text-align: center; }
+      text-align: justify; }
       .body_wrapper .section--main .section--main--description p {
-        font-size: 18px;
+        font-size: 1.125rem;
         line-height: 24px;
         letter-spacing: 0.2px;
         margin-bottom: 15px;
@@ -216,7 +226,7 @@ p {
 .demo_page_wrapper {
   padding-top: 50px; }
   .demo_page_wrapper .body_wrapper {
-    width: 80%;
+    padding: 0px 15px;
     margin: 0 auto; }
     .demo_page_wrapper .body_wrapper .section--demo .section--general--text {
       display: inline-block;

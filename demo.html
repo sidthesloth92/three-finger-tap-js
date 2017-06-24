@@ -15,7 +15,7 @@
         <section class="body_wrapper">
             <section class="section--general section--demo">
                 <h1 class="section--general--heading">Demo</h1>
-                <p class="section--general--text">Hover over(Desktop)/Triple tap(Mobile/Tab) the hyperlink in different regions to see how the preview window opens up for each region.</p>
+                <p class="section--general--text">to see how the preview window opens up for each region.</p>
                 <span class="section--general--checkbox">
                     <span class="enable--disable--button"></span>
                 </span>
@@ -36,6 +36,15 @@
             name : 'three-finger-tap',
             hoverTimeout: 1000
         });
+
+
+        var instructionTextHolder = document.querySelector('.section--general--text');
+        if(threeFingerTap.getIsMobileDevice()) {
+            instructionTextHolder.innerText = "Tap thrice on the URL's " + instructionTextHolder.innerText;
+        }
+        else  {
+            instructionTextHolder.innerText = "Hover over the URL's " + instructionTextHolder.innerText;
+        }
 
         var toggled = true;
         var toggleButton = document.querySelector('.enable--disable--button');
