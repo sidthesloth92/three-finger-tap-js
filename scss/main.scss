@@ -96,10 +96,8 @@ p {
         width: 75px;
         height: 75px;
         overflow: hidden;
-        background: #FFF9E1;
         padding: 10px;
         border-radius: 100%;
-        border: 5px solid #fffabf;
         margin-bottom: 20px;
         img {
             width: 75px;
@@ -235,7 +233,6 @@ p {
             .section--general--text {
                 display: inline-block;
                 width: 80%;
-                
             }
             .section--general--checkbox {
                 display: inline-block;
@@ -245,7 +242,6 @@ p {
                 .enable--disable--button {
                     display: inline-block;
                     position: relative;
-                    float: right;
                     width: 50px;
                     height: 26px;
                     border: 1px solid $border-color;

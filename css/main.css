@@ -122,10 +122,8 @@ p {
     width: 75px;
     height: 75px;
     overflow: hidden;
-    background: #FFF9E1;
     padding: 10px;
     border-radius: 100%;
-    border: 5px solid #fffabf;
     margin-bottom: 20px; }
     .header .header--logo img {
       width: 75px; }
@@ -238,7 +236,6 @@ p {
       .demo_page_wrapper .body_wrapper .section--demo .section--general--checkbox .enable--disable--button {
         display: inline-block;
         position: relative;
-        float: right;
         width: 50px;
         height: 26px;
         border: 1px solid #E0E0E0;
